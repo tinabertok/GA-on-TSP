@@ -32,27 +32,30 @@ situacijo(increase fitness)
 
 
 NAVODILA
-Kromosomi -> urejeni seznami, se pravi poti
-Različne variacije crossoverjev:
-*order crossover
-*partially mapped crossover
-*cycle crossover
-*…
-Različne velikosti populacije
-Nekaj testnih grafov generiramo sami, nekaj jih je na internetu.
+
+Pri problemu TSP moramo upoštevati, da veljavna rešitev predstavla pot v kateri je vsaka lokacija vključena natanko enkrat. Če pot vsebuje eno lokacijo večkrat, ali kakšno lokacijo popolnoma izpusti, potem rešitev ni veljavna. Prav zato mora naš genetski algoritem zadoščati tem pogojem, ki jih dosežemo z mutacijo in križnimi metodami. 
+
+Kromosomi -> urejeni seznami, se pravi poti \
+Različne variacije crossoverjev: \
+* order crossover \
+* partially mapped crossover \ 
+* cycle crossover  \
+* … \
+Različne velikosti populacije \
+Nekaj testnih grafov generiramo sami, nekaj jih je na internetu. \
 
 LITERATURA:
-C. Blum, A. Roli, Metaheuristics in Combinatorial Optimization: Overview and Conceptual
+
+* C. Blum, A. Roli, Metaheuristics in Combinatorial Optimization: Overview and Conceptual
 Comparison, online
-S. Luke, Essentials of Metaheuristics: a set of undergraduate lecture notes, online
-Z. Michalewicz, Genetic algorithms + data structures = evolution programs, Springer. Chapter 9
-Z. Michalewicz, D. B. Fogel, How to solve it: modern heuristics, Springer. Chapter 8
-M. Affenzeller, Genetic algorithms and genetic programming: modern concepts and practical
+* S. Luke, Essentials of Metaheuristics: a set of undergraduate lecture notes, online
+* Z. Michalewicz, Genetic algorithms + data structures = evolution programs, Springer. Chapter 9
+* Z. Michalewicz, D. B. Fogel, How to solve it: modern heuristics, Springer. Chapter 8
+* M. Affenzeller, Genetic algorithms and genetic programming: modern concepts and practical
 applications, CRC press. Chapter 8
 
 DODATNI VIRI
 * http://www.obitko.com/tutorials/genetic-algorithms/tsp-example.php
 * https://github.com/maoaiz/tsp-genetic-python
-* https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-
-for-python-6fe5d2b3ca35
+* https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
 * https://gist.github.com/turbofart/3428880
