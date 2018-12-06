@@ -62,18 +62,19 @@ def OX(stars1, stars2, a, b):
     otrok2 = []*len(stars1)
     otrok1[a, b] = stars1[a, b]
     otrok2[a, b] = stars2[a, b]
-    
+
+#definiramo funkcijo OX, vhodna podatka sta dve poti in dve vrednosti, kjer ju sekamo
 def OX(stars1, stars2, a,b):
-	otrok1=[0]*len(stars1)
+	otrok1=[0]*len(stars1) #oba otroka najprej definiramo kot vektorja ničel dolžine staršev
 	otrok2=[0]*len(stars2)
-	otrok1[a:b]=stars1[a:b]
+	otrok1[a:b]=stars1[a:b] #osrednji del med presekoma se v otrocih ohrani
 	otrok2[a:b]=stars2[a:b]
-	vmesni1=otrok1[b:len(otrok1)] + otrok1[0:b]
+	vmesni1=otrok1[b:len(otrok1)] + otrok1[0:b] #za lažje delo prestavimo zadnji del pred prvega, ker OX poteka od b naprej
 	vmesni2=otrok2[b:len(otrok2)] + otrok2[0:b]
-	s1=0
+	s1=0 #mesti spreminjanja vrednosti otrok nastavimo na 0 (v vmesnih otrocih), kar je b+1 v prvotnih otrocih
 	s2=0
-	for i in chain(range(b, len(stars2)-1), range(b)):
-		if stars2[i] not in vmesni1:
+	for i in chain(range(b, len(stars2)-1), range(b)): #po zanki potujemo najprej po zadnjem delu obratnega starša, nato pa po prvih dveh
+		if stars2[i] not in vmesni1: #vsakič, ko naletimo na element, ki še ni v vmesnem otroku, mu ga dodamo in mesto dodajanja povečamo za 1
 			vmesni1[s1]=stars2[i]
 			s1=s1+1
 	for i in chain(range(b, len(stars1)-1), range(b)):
@@ -81,7 +82,7 @@ def OX(stars1, stars2, a,b):
 			vmesni2[s2]=stars1[i]
 			s2=s2+1
 	print([vmesni1, vmesni2])
-	pravi1=vmesni1[a-1:len(vmesni1)] + vmesni1[0:a-1]
+	pravi1=vmesni1[a-1:len(vmesni1)] + vmesni1[0:a-1] #na koncu oba vmesna otroka spet preuredimo, da tretji del iz spredaj prenesemo nazaj
 	pravi2=vmesni2[a-1:len(vmesni2)] + vmesni2[0:a-1]
 	return([pravi1, pravi2])
     
