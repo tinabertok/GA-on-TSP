@@ -112,12 +112,6 @@ mut = mutacija(ot.copy(), 0.05)
     
     
     
-
-
-
-    
-    
-    
     
 
 
