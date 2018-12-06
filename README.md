@@ -33,6 +33,23 @@ situacijo(increase fitness)
 
 NAVODILA
 
+
+POSTOPEK 
+
+1. Selection 
+
+Izbiramo starše 
+
+2. Crossover
+
+Naredimo potomce
+
+3. Mutacija
+
+Mutiramo, da ohranjamo diverziteto v algoritmu. 
+
+
+
 Pri problemu TSP moramo upoštevati, da veljavna rešitev predstavla pot v kateri je vsaka lokacija vključena natanko enkrat. Če pot vsebuje eno lokacijo večkrat, ali kakšno lokacijo popolnoma izpusti, potem rešitev ni veljavna. Prav zato mora naš genetski algoritem zadoščati tem pogojem, ki jih dosežemo z mutacijo in križnimi metodami. 
 
 Kromosomi -> urejeni seznami, se pravi poti \
@@ -40,8 +57,8 @@ Različne variacije crossoverjev:
 * order crossover 
 * partially mapped crossover 
 * cycle crossover  
-* … 
-Različne velikosti populacije 
+* … \
+Različne velikosti populacije \
 Nekaj testnih grafov generiramo sami, nekaj jih je na internetu. 
 
 LITERATURA:
