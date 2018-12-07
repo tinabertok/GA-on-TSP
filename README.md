@@ -58,7 +58,7 @@ Različne variacije crossoverjev:
 * *order crossover* 
 * *partially mapped crossover* 
 * *cycle crossover*  
-* … \
+* … 
 
 Tako bomo dobili otroke, ki so že izboljšani primeri poti. Da pa ohranjamo diverziteto v populaciji, si moramo med temi otroci izbrati določen procent, ki ga bomo mutirali z SWAP mutacijo (zamenjali bomo dva vozlišča v poti). Vsako vozlišče z neko verjetnostjo mutiramo, se pravi zamenjamo položaj mutiranega vozlišča z nekim naključnim vozliščem na poti. S tem postopkom se tudi poskušamo izgoniti prehitri konvergenci, ki bi nas lahko vodila do lokalnega, ne pa globalnega optimuma. 
 
