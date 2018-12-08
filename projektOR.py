@@ -115,12 +115,9 @@ def potomci(utezi, populacija, verjMutacije, rez_a, rez_b, kTurnir):
 
 #izbranci so vozlisca, izmed njih izberemo najbolso pot
 def najboljsa_pot(nasledniki):
-    izbranci = list(range(1, len(nasledniki) + 1))
-    random.shuffle(izbranci)
     minimum = math.inf
     pot = []
-    
-    for i in izbranci:
+    for i in nasledniki:
         if nasledniki[i][1] < minimum:
             minimum = nasledniki[i][1]
             pot = nasledniki[i][0]
