@@ -112,14 +112,30 @@ def potomci(utezi, populacija, verjMutacije, rez_a, rez_b, kTurnir):
 # Trenutno fja naredi fiksno v naprej doloceno stevilo ponovitev izbiranje potomcev.
 # Potrebno razmisliti tudi o kakem drugem zaustavitvenem kriteriju.
 
+
+#izbranci so vozlisca, izmed njih izberemo najbolso pot
+def najboljsa_pot(nasledniki):
+    izbranci = list(range(1, len(nasledniki) + 1))
+    random.shuffle(izbranci)
+    minimum = math.inf
+    pot = []
+    
+    for i in izbranci:
+        if nasledniki[i][1] < minimum:
+            minimum = nasledniki[i][1]
+            pot = nasledniki[i][0]
+            
+    return(pot)
+
 def ga_tsp(ponovitve, utezi, populacija, verjMutacije, rez_a, rez_b, kTurnir):
     nasledniki = populacija
     for _ in range(ponovitve):
         nasledniki = potomci(utezi, nasledniki, verjMutacije, rez_a, rez_b, kTurnir)
+        resitev = najboljsa_pot(nasledniki)
         
-    "potrebno dopisati se kodo, da vrne najkrajso pot, trenutno vrne celotno zadnjo generacijo"
-    
-    return(nasledniki)
+    return(resitev)
+
+
 
 ##########################################################################################################################################
 
