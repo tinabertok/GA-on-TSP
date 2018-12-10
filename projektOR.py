@@ -76,6 +76,61 @@ def ox(stars1, stars2, rez_a, rez_b):
     
     return(otrok1, otrok2)
 
+
+
+#drugi crossover postopek, vhodna podatka sta dva starša in dva reza c in d
+#prvemu otroku prepišemo vrednosti prvega starša med obema rezoma
+#vsaka vrednost i iz izreza drugega starša, ki ni v izrezu prvega, dobi svoj istoležeči par v prvem staršu. Če je ta par že vsebovan v izrezu drugega,
+#tej vrednosti zopet poiščemo par iz prvega starša in to počnemo dokler dobljeni istoležeči par v drugem staršu ne leži izven izreza. 
+#Takrat na njegovo mesto (v drugem staršu) zapišemo vrednost i.
+#Na koncu postopka vsa prazna mesta v otroku zapolnimo z istoležečimi vrednostmi iz drugega starša.
+
+def PMX(stars1, stars2, rez_c, rez_d):
+	l=len(stars1)
+	izrez1 = stars1[rez_c:rez_d]
+	izrez2 = stars2[rez_c:rez_d]
+	otrok1 = [0]*l
+	otrok1[rez_c:rez_d]=izrez1
+	u=0
+	v=0
+	for i in izrez2:
+		if i not in izrez1:
+			u=stars2.index(i)
+			par_u=stars1[u]
+			while par_u in izrez2:
+				v=stars2.index(par_u)
+				par_u=stars1[v]
+			mesto=stars2.index(par_u)
+			otrok1[mesto]=i
+	for j in range(l):
+		if otrok1[j]==0:
+		       otrok1[j]=stars2[j]
+	return(otrok1)
+
+#popolnoma enak postopek ponovimo še za pridobitev drugega otroka, pri čemer le zamenjamo oba starša:
+
+def PMX(stars1, stars2, rez_c, rez_d):
+	l=len(stars1)
+	izrez1 = stars1[rez_c:rez_d]
+	izrez2 = stars2[rez_c:rez_d]
+	otrok2 = [0]*l
+	otrok2[rez_c:rez_d]=izrez2
+	u=0
+	v=0
+	for i in izrez1:
+		if i not in izrez2:
+			u=stars1.index(i)
+			par_u=stars2[u]
+			while par_u in izrez1:
+				v=stars1.index(par_u)
+				par_u=stars2[v]
+			mesto=stars1.index(par_u)
+			otrok2[mesto]=i
+	for j in range(l):
+		if otrok2[j]==0:
+		       otrok2[j]=stars1[j]
+	return(otrok2)
+
 # Vsako vozlisce z verjetnostjo verjMutacije mutiramo - zamenjamo polozaj mutiranega vozlisca in nakljucnega vozlisca na poti.
 # S tem ohranjamo raznolikost populacije in se poskusamo izogniti prehitri konvergenci, ki nas lahko vodi blizu lokalnega, ne pa globalnega optimuma.
 
