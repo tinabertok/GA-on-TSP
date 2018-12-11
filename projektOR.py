@@ -107,30 +107,6 @@ def PMX(stars1, stars2, rez_c, rez_d):
 		       otrok1[j]=stars2[j]
 	return(otrok1)
 
-#popolnoma enak postopek ponovimo še za pridobitev drugega otroka, pri čemer le zamenjamo oba starša:
-
-def PMX(stars1, stars2, rez_c, rez_d):
-	l=len(stars1)
-	izrez1 = stars1[rez_c:rez_d]
-	izrez2 = stars2[rez_c:rez_d]
-	otrok2 = [0]*l
-	otrok2[rez_c:rez_d]=izrez2
-	u=0
-	v=0
-	for i in izrez1:
-		if i not in izrez2:
-			u=stars1.index(i)
-			par_u=stars2[u]
-			while par_u in izrez1:
-				v=stars1.index(par_u)
-				par_u=stars2[v]
-			mesto=stars1.index(par_u)
-			otrok2[mesto]=i
-	for j in range(l):
-		if otrok2[j]==0:
-		       otrok2[j]=stars1[j]
-	return(otrok2)
-
 # Vsako vozlisce z verjetnostjo verjMutacije mutiramo - zamenjamo polozaj mutiranega vozlisca in nakljucnega vozlisca na poti.
 # S tem ohranjamo raznolikost populacije in se poskusamo izogniti prehitri konvergenci, ki nas lahko vodi blizu lokalnega, ne pa globalnega optimuma.
 
@@ -183,9 +159,7 @@ def ga_tsp(ponovitve, utezi, populacija, verjMutacije, rez_a, rez_b, kTurnir):
     nasledniki = populacija
     for _ in range(ponovitve):
         nasledniki = potomci(utezi, nasledniki, verjMutacije, rez_a, rez_b, kTurnir)
-        resitev = najboljsa_pot(nasledniki)
-        
-    return(resitev)
+    return(najboljsa_pot(nasledniki))
 
 
 
@@ -198,4 +172,5 @@ a= 3
 b = 5
 mut = 0.02
 p = ga_tsp(1000 , cene, poti, mut, a, b, k)
+print(p, )
   
