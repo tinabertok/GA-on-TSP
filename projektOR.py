@@ -107,6 +107,40 @@ def PMX(stars1, stars2, rez_c, rez_d):
 		       otrok1[j]=stars2[j]
 	return(otrok1)
 
+
+
+#postopek cycle crossover sprejme za vhodne podatke dva starša, ki ju poveže v slovar, starš1 predstavlja ključe, starš2 pa vrednosti.
+#najprej poiščemo vse cikle med staršema in ju shranimo v množico A. Nato otroka ustvarimo tako, da na primer prvemu otroku dodamo po vrsti 
+#vsak sodi cikel iz prvega starša in vsak lihi iz drugega, pri drugem otroku pa delamo ravno obratno.
+
+def CX(stars1, stars2):
+	slovar=ustvari_slovar(stars1, stars2)
+	l=len(stars1)
+	otrok1=[0]*l
+	otrok2=[0]*l
+	cikli=[]
+	cikel=[]
+	A=[]
+	for i in slovar.keys():
+		if i not in cikli:
+			cikel=[i]
+			naslednji=slovar[i]
+			while naslednji not in cikel:
+				cikel.append(naslednji)
+				naslednji=slovar[naslednji]
+			A = A + [cikel]
+			cikli = cikli + cikel
+	for C in A:
+		for j in C:
+			u=stars1.index(j)
+			if A.index(C) % 2==0:
+				otrok1[u]=j
+				otrok2[u]=stars2[u]
+			else:
+				otrok2[u]=j
+				otrok1[u]=stars2[u]
+	return(otrok1, otrok2)
+
 # Vsako vozlisce z verjetnostjo verjMutacije mutiramo - zamenjamo polozaj mutiranega vozlisca in nakljucnega vozlisca na poti.
 # S tem ohranjamo raznolikost populacije in se poskusamo izogniti prehitri konvergenci, ki nas lahko vodi blizu lokalnega, ne pa globalnega optimuma.
 
