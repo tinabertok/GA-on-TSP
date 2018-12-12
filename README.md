@@ -11,17 +11,17 @@ GA potrebuje:
 * fitness funkcijo, ki oceni zalogo vrednosti rešitev (to je funkcija, ki primerja kako blizu je zasnova rešitev dejanskim ciljem)
 
 
-Glavna lastnost, zaradi katere so te genetske predstavitve priročne je, da se njihovi deli zlahka poravnajo zaradi svoje določene velikosti, kar olajša preproste križne operacije(crossover operations). Lahko se uporabijo tudi spremenljive predstavitve dolžine, v tem primeru pa je izvajanje bolj zapleteno. Drevesne predstavitve se proučujejo v genetskem programiranju in predstavljajo grafične oblike v evolucijskem načrtovanju; v programu za izražanje genov je raziskana mešanica obeh linearnih kromosomov in drevesa.
+Glavna lastnost, zaradi katere so te genetske predstavitve priročne je, da se njihovi deli zlahka poravnajo zaradi svoje določene velikosti, kar olajša preproste križne operacije (crossover operations). Lahko se uporabijo tudi spremenljive predstavitve dolžine, v tem primeru pa je izvajanje bolj zapleteno. Drevesne predstavitve se proučujejo v genetskem programiranju in predstavljajo grafične oblike v evolucijskem načrtovanju; v programu za izražanje genov je raziskana mešanica obeh linearnih kromosomov in drevesa.
 
 
 Imamo populacije z različnim številom kromosomov (npr. 16, 32…). Za te kromosome uporabimo
-permutacijsko kodiranje(to je permutacija mest na TSP). TSP rešujemo na povezanem grafu(vsa
-vozlišča so povezana med sabo) z evklidskimi povezavami (navadne povezave).
+permutacijsko kodiranje(to je permutacija mest na TSP). TSP rešujemo na povezanem grafu (vsa
+vozlišča so povezana med seboj) z evklidskimi povezavami (navadne povezave).
 Po brisanju ali dodajanju novega mesta je potrebno ustvariti nove kromosome in ponovno zagnati
 celoten genetski algoritem.
 Izbiramo lahko crossoverje in tipe mutacij.
 
-Crossover: imamo že podano katere naj uporabimo (OC, PMC, CC,…).
+Crossover: imamo že podano, katere naj uporabimo (OC, PMC, CC,…).
 
 Mutacije :
 * *Normalna slučajna* (nekaj mest je izbranih in zamenjanih)
@@ -44,27 +44,28 @@ Pri problemu TSP moramo upoštevati, da veljavna rešitev predstavlja pot v kate
 
 ## POSTOPEK 
 
-Na začetku moramo naš problem potujočega trgovca predstvaiti z grafom v obliki n x n matrike cen povezav. Graf smo generirali tako, da smo naključno izbrali celoštevilsko ceno povezave.
+Na začetku moramo naš problem potujočega trgovca predstaviti z grafom v obliki n x n matrike cen povezav. Graf smo generirali tako, da smo naključno izbrali celoštevilsko ceno povezave.
 
-Nato smo morali ciljno funkcijo oz. fitness function, ki je v našem primeru predstavljala dolžino najcenejše poti.
+Nato smo morali definirati ciljno funkcijo oz. fitness function, ki je v našem primeru predstavljala dolžino najcenejše poti.
 
-Naključno smo ustvarili neko začetno populacijo določene velikosti. Vsak element popoulacije predstavlja neko pot, ki obišče vsa vozlišča. Populacijo smo predstavili z slovarjem, v katerem so ključi poti, vrednosti pa njihove dolžine. 
+Naključno smo ustvarili neko začetno populacijo določene velikosti. Vsak element populacije predstavlja neko pot, ki obišče vsa vozlišča grafa. Populacijo smo predstavili s slovarjem, v katerem so ključi poti, vrednosti pa njihove dolžine. 
 
-V nadaljevanju izberemo starše, ki jih damo v paritveni bazen. Za selekcijo imamo dve možnosti, lahko imamo selekcijo s turnirjem ali proporcionalna selekcija. 
-Paritveni bazen bomo gradili turnirsko. To pomeni, da bomo iz populacije naključno izbrali k kromosomov oz. poti. Naša funkcija (selekcija) nam bo vrnila zmagovalca kot par poti, ki ima najkrajšo dolžino in njeno dolžino. Se pravi bomo za n staršev imeli n turnirjev. Število kromosomov v turnirju (k) izberemo sami, vendar moramo biti predvidni. Večji kot je k, hitrejša bo konvergenca, kar pa ni nujno dobro. Najbolše starše(tiste, ki so največkrat zmagali) bomo dali v paritveni bazen.
+V nadaljevanju izberemo starše, ki jih damo v paritveni bazen. Za selekcijo imamo dve možnosti, in sicer selekcijo s turnirjem ter proporcionalno selekcijo. 
+Paritveni bazen bomo gradili turnirsko. To pomeni, da bomo iz populacije naključno izbrali k kromosomov oz. poti. Naša funkcija (selekcija) nam bo vrnila zmagovalca kot pot z najkrajšo dolžino in pripadajočo dolžino. Torej bomo za n staršev v bazenu imeli n turnirjev. Število kromosomov v turnirju (k) izberemo sami, vendar moramo biti predvidni. Večji kot je k, hitrejša bo konvergenca, kar pa ni nujno dobro. Najboljše starše (tiste, ki so največkrat zmagali) bomo dali v paritveni bazen.
 
-Za ustvarjanje otrok bomo uporabili različna križanja staršev(poti) iz paritvenega bazena. 
+Za ustvarjanje otrok bomo uporabili različna križanja staršev (poti) iz paritvenega bazena. 
+
 Različne variacije crossoverjev: 
 * *order crossover* 
 * *partially mapped crossover* 
 * *cycle crossover*  
 * … 
 
-Tako bomo dobili otroke, ki so že izboljšani primeri poti. Da pa ohranjamo diverziteto v populaciji, si moramo med temi otroci izbrati določen procent, ki ga bomo mutirali z SWAP mutacijo (zamenjali bomo dva vozlišča v poti). Vsako vozlišče z neko verjetnostjo mutiramo, se pravi zamenjamo položaj mutiranega vozlišča z nekim naključnim vozliščem na poti. S tem postopkom se tudi poskušamo izgoniti prehitri konvergenci, ki bi nas lahko vodila do lokalnega, ne pa globalnega optimuma. 
+Tako bomo dobili otroke, ki so že izboljšani primeri poti. Da pa ohranjamo diverziteto v populaciji, si moramo med temi otroci izbrati določen procent, ki ga bomo mutirali z SWAP mutacijo (zamenjali bomo dve vozlišči v poti). Vsako vozlišče z neko verjetnostjo mutiramo, torej zamenjamo položaj mutiranega vozlišča z nekim naključnim vozliščem na poti. S tem postopkom se tudi poskušamo izgoniti prehitri konvergenci, ki bi nas lahko vodila do lokalnega, ne pa globalnega optimuma. 
 
 
 Naš algoritem bomo preizkusili na različnih velikostih populacije in rezultate primerjali. 
-Testne grafe, ki jih bomo generirali sami bomo nato tudi primerjali s tistimi, ki smo jih našli na internetu. 
+Testne grafe, ki jih bomo generirali sami, bomo nato tudi primerjali s tistimi, ki smo jih našli na internetu. 
 
 ## LITERATURA:
 
@@ -81,3 +82,5 @@ applications, CRC press. Chapter 8
 * https://github.com/maoaiz/tsp-genetic-python
 * https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
 * https://gist.github.com/turbofart/3428880
+* https://arxiv.org/ftp/arxiv/papers/1203/1203.3097.pdf
+* https://hrcak.srce.hr/file/163313
