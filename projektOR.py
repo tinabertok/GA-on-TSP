@@ -107,6 +107,9 @@ def PMX(stars1, stars2, rez_c, rez_d):
 		       otrok1[j]=stars2[j]
 	return(otrok1)
 
+#algoritem deluje tudi za robne vrednosti, torej ko je rez_c=0, rez_d=ln oziroma, kadar sta oba reza enaka. 
+#problem se pojavi pri definiranju otroka, kot seznam ničel, v primeru da je kateri od elementov v starših ničeln. Ali nas to moti?
+
 
 
 #postopek cycle crossover sprejme za vhodne podatke dva starša, ki ju poveže v slovar, starš1 predstavlja ključe, starš2 pa vrednosti.
