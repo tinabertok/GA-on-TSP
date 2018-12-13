@@ -2,6 +2,28 @@ import random
 import numpy as np
 import math
 
+
+
+#Naredimo slovar z mesti
+
+def mesta(slovar_mest):
+    n = len(slovar_mest)
+    utezi = [[0 for i in range(n)] for i in range(n)]
+    
+    for i in range(n):
+        for j in range(i+1, n):
+            print(i,j)
+            print(slovar_mest[0][1])
+            utezi[i][j] = ((slovar_mest[i][0]-slovar_mest[j][0])**2 + (slovar_mest[i][1]-slovar_mest[j][1])**2)**(1/2)
+            print(utezi)
+            utezi[j-1][i-1] = utezi[i-1][j-1]
+            
+    return(utezi)
+
+
+
+
+
 # Ustvarimo matriko cen povezav/utezi, kjer za vsak par vozlisc nakljucno izberemo celostevilsko ceno povezave med 0 in maxCena.
 
 def utezi(n, maxCena):
@@ -198,10 +220,10 @@ def najboljsa_pot(nasledniki):
             
     return(pot)
 
-def ga_tsp(ponovitve, utezi, populacija, verjMutacije, kTurnir):
+def ga_tsp(ponovitve, utezi, populacija, verjMutacije, kTurnir, crossover):
     nasledniki = populacija
     for _ in range(ponovitve):
-        nasledniki = potomci(utezi, nasledniki, verjMutacije, kTurnir)
+        nasledniki = potomci(utezi, nasledniki, verjMutacije, kTurnir, crossover)
     return(najboljsa_pot(nasledniki))
 
 
@@ -212,6 +234,8 @@ cene = utezi(5, 100)
 poti = populacija(10, cene)
 k = 4
 mut = 0.02
-p = ga_tsp(1000 , cene, poti, mut, k)
+p = ga_tsp(1000 , cene, poti, mut, k, ox)
 print(p)
-  
+
+nas_slovar = {"mesto1" : [2,5], "mesto2" : [3,7]}
+print(nas_slovar["mesto1"])
