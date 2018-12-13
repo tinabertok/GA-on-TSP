@@ -1,10 +1,10 @@
 import random
 import numpy as np
 import math
+import time
 
 
-
-#Naredimo slovar z mesti
+# Mnozica mesto je seznam koordinat mest - (x, y). Fja vrne matriko evklidskih razdalj med mesti.
 
 def mesta(mesta):
     n = len(mesta)
@@ -16,10 +16,6 @@ def mesta(mesta):
             utezi[j][i] = utezi[i][j]
             
     return(utezi)
-
-
-
-
 
 # Ustvarimo matriko cen povezav/utezi, kjer za vsak par vozlisc nakljucno izberemo celostevilsko ceno povezave med 0 in maxCena.
 
@@ -217,12 +213,17 @@ def najboljsa_pot(nasledniki):
             
     return(pot)
 
-def ga_tsp(ponovitve, utezi, populacija, verjMutacije, kTurnir, crossover):
+def ga_tsp(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover):
     nasledniki = populacija
-    for _ in range(ponovitve):
+    for _ in range(stGeneracij):
         nasledniki = potomci(utezi, nasledniki, verjMutacije, kTurnir, crossover)
     return(najboljsa_pot(nasledniki))
 
+def povprecje(ponovitve, stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover):
+    vsota = 0
+    for _ in range(ponovitve):
+        vsota += dolzinaPoti(ga_tsp(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover), utezi)
+    return(vsota/ponovitve)
 
 
 ##########################################################################################################################################
@@ -232,12 +233,27 @@ poti = populacija(10, cene)
 k = 4
 mut = 0.02
 p = ga_tsp(1000 , cene, poti, mut, k, ox)
-#print(p)
-
-#m = [[2,5], [3,7]]
-#print(mesta(m))
 
 primer = [[60, 200], [180, 200], [80, 180], [140, 180], [20, 160], [100, 160], [200, 160], [140, 140], [40, 120], [100, 120], [180, 100], [60, 80], [120, 80], [180, 60], [20, 40], [100, 40], [200, 40], [20, 20], [60, 20], [160, 20]]
 ce = mesta(primer)
-po = populacija(50, ce)
-print(dolzinaPoti(ga_tsp(100, ce, po, 0.015, 5, ox), ce))
+#print(dolzinaPoti(ga_tsp(100, ce, po, 0.015, 5, ox), ce))
+#print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+
+def main():
+    po = populacija(10, ce)
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 10 in čas izvedbe 100 ponovitev:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+    print("--- %s seconds ---" % (time.time() - start_time))
+    
+    po = populacija(20, ce)
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 20 in čas izvedbe 100 ponovitev:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+    print("--- %s seconds ---" % (time.time() - start_time))
+    
+    po = populacija(50, ce)
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 20 in čas izvedbe 100 ponovitev:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+    print("--- %s seconds ---" % (time.time() - start_time))
