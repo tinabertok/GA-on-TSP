@@ -138,7 +138,7 @@ def PMX(stars1, stars2):
 #vsak sodi cikel iz prvega starša in vsak lihi iz drugega, pri drugem otroku pa delamo ravno obratno.
 
 def CX(stars1, stars2):
-	slovar=ustvari_slovar(stars1, stars2)
+	slovar={key:value for key, value in zip(list(stars1), list(stars2))}
 	l=len(stars1)
 	otrok1=[0]*l
 	otrok2=[0]*l
