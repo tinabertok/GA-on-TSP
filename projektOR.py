@@ -61,8 +61,11 @@ def turnir(populacija, kTurnir):
 # v vrstnem redu 3. podzaporedje, 1. podazporedje, 2. podzaporedje. Seveda izkljucimo tista vozlisca, ki so ze vsebovana. Ko pridemo do konca,
 # nadaljujemo se od zacetka do a-tega mesta. Enako za drugega potomca, le da vlogi starsev zamenjamo.
 
-def ox(stars1, stars2, rez_a, rez_b):
+def ox(stars1, stars2):
     dolzina = len(stars1)
+    
+    rez_a = random.randint(1,len(stars1))
+    rez_b = random.randint(1,len(stars1))
     
     ostanek1 = stars2[rez_b:] + stars2[:rez_b]
     for vozl in stars1[rez_a:rez_b]:
@@ -85,8 +88,11 @@ def ox(stars1, stars2, rez_a, rez_b):
 #Takrat na njegovo mesto (v drugem staršu) zapišemo vrednost i.
 #Na koncu postopka vsa prazna mesta v otroku zapolnimo z istoležečimi vrednostmi iz drugega starša.
 
-def PMX(stars1, stars2, rez_c, rez_d):
+def PMX(stars1, stars2):
 	l=len(stars1)
+	rez_c = random.randint(1,len(stars1))
+	rez_d = random.randint(1,len(stars1))
+    
 	izrez1 = stars1[rez_c:rez_d]
 	izrez2 = stars2[rez_c:rez_d]
 	otrok1 = [0]*l
@@ -161,13 +167,13 @@ def mutacija(otrok, verjMutacije):
 # Z drugimi besedami: ali nas moti, da je kak stars izbran veckrat?
 # Prav tako moramo razmisliti ali bomo upostevali "elitism" - da se dolocen delez najkrajsih poti v populaciji avtomaticno prenese naprej.
 
-def potomci(utezi, populacija, verjMutacije, rez_a, rez_b, kTurnir):
+def potomci(utezi, populacija, verjMutacije, kTurnir, crossover):
     potomci = {}
     for i in range(int(len(populacija)/2)):
         stars1 = turnir(populacija, kTurnir)
         stars2 = turnir(populacija, kTurnir)
         
-        otroka = ox(stars1, stars2, rez_a, rez_b)
+        otroka = crossover(stars1, stars2)
         otrok1 = mutacija(otroka[0], verjMutacije)
         otrok2 = mutacija(otroka[1], verjMutacije)
         
@@ -192,10 +198,10 @@ def najboljsa_pot(nasledniki):
             
     return(pot)
 
-def ga_tsp(ponovitve, utezi, populacija, verjMutacije, rez_a, rez_b, kTurnir):
+def ga_tsp(ponovitve, utezi, populacija, verjMutacije, kTurnir):
     nasledniki = populacija
     for _ in range(ponovitve):
-        nasledniki = potomci(utezi, nasledniki, verjMutacije, rez_a, rez_b, kTurnir)
+        nasledniki = potomci(utezi, nasledniki, verjMutacije, kTurnir)
     return(najboljsa_pot(nasledniki))
 
 
@@ -205,9 +211,7 @@ def ga_tsp(ponovitve, utezi, populacija, verjMutacije, rez_a, rez_b, kTurnir):
 cene = utezi(5, 100)
 poti = populacija(10, cene)
 k = 4
-a= 3
-b = 5
 mut = 0.02
-p = ga_tsp(1000 , cene, poti, mut, a, b, k)
-print(p, )
+p = ga_tsp(1000 , cene, poti, mut, k)
+print(p)
   
