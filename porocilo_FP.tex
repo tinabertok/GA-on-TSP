@@ -1,0 +1,131 @@
+\documentclass[12pt,a4paper]{amsart}
+% ukazi za delo s slovenscino -- izberi kodiranje, ki ti ustreza
+\usepackage[slovene]{babel}
+%\usepackage[cp1250]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{url}
+\usepackage{graphicx}
+%\usepackage[demo]{graphicx}
+%\usepackage[normalem]{ulem}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{hyperref}
+\hypersetup{
+     colorlinks   = true,
+     citecolor    = gray
+}
+
+% ne spreminjaj podatkov, ki vplivajo na obliko strani
+\textwidth 15cm
+\textheight 24cm
+\oddsidemargin.5cm
+\evensidemargin.5cm
+\topmargin-5mm
+\addtolength{\footskip}{10pt}
+\pagestyle{plain}
+\overfullrule=15pt % oznaci predlogo vrstico
+
+
+% ukazi za matematicna okolja
+\theoremstyle{definition} % tekst napisan pokoncno
+\newtheorem{definicija}{Definicija}[section]
+\newtheorem{primer}[definicija]{Primer}
+\newtheorem{opomba}[definicija]{Opomba}
+
+\renewcommand\endprimer{\hfill$\diamondsuit$}
+
+
+\theoremstyle{plain} % tekst napisan posevno
+\newtheorem{lema}[definicija]{Lema}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}[definicija]{Posledica}
+
+
+% za stevilske mnozice uporabi naslednje simbole
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+
+% ukaz za slovarsko geslo
+\newlength{\odstavek}
+\setlength{\odstavek}{\parindent}
+\newcommand{\geslo}[2]{\noindent\textbf{#1}\hspace*{3mm}\hangindent=\parindent\hangafter=1 #2}
+
+% naslednje ukaze ustrezno popravi
+\newcommand{\program}{Finančna matematika} % ime studijskega programa: Matematika/Finan"cna matematika
+\newcommand{\imeavtorja}{Tina Bertok\\ Neža Habjan \\ Gašper Letnar} % ime avtorja
+\newcommand{\imementorja}{prof. dr. Riste Škrekovski} % akademski naziv in ime mentorja
+\newcommand{\naslovdela}{Genetski algoritem na problemu potujočega trgovca}
+\newcommand{\letnica}{2018} %letnica 
+
+
+
+
+\begin{document}
+
+% od tod do povzetka ne spreminjaj nicesar
+\thispagestyle{empty}
+\noindent{\large
+UNIVERZA V LJUBLJANI\\[1mm]
+FAKULTETA ZA MATEMATIKO IN FIZIKO\\[5mm]
+\program\ -- 1.~stopnja}
+\vfill
+
+\begin{center}{\large
+\imeavtorja\\[2mm]
+{\bf \naslovdela}\\[10mm]
+Projekt v povezavi z OR\\[1cm]}
+
+\end{center}
+\vfill
+
+\noindent{\large
+Ljubljana, \letnica}
+\pagebreak
+
+\thispagestyle{empty}
+\hypersetup{linkcolor = black}
+\tableofcontents
+\pagebreak
+
+\section{Navodilo}
+
+Implement the genetic algorithm metaheuristic for TSP. Present the chromosomes as ordered
+lists i.e. as paths. Apply different variations for the crossover operations, such as order crossover
+(OX), paritally mapped crossover (PMX), cycle crossover (CX), etc. Experiment with different
+sizes of the population. You can generate some of the testing graphs yourself, and you can find
+some of them on the Internet.
+
+\newpage
+\section{Uvod}
+
+\newpage
+\section{Opis dela}
+
+\
+
+\newpage
+\section{Zaključek}
+
+
+\begin{thebibliography}{99}
+
+
+\bibitem{wiki}
+\emph{Genetic algorithm}, v: Wikipedia: The Free Encyclopedia, [ogled 13.~12.~201], dostopno na \url{https://en.wikipedia.org/wiki/Genetic_algorithm}.
+
+\bibitem{splet}
+N.~Kumar, Karambir in R.~Kumar, \emph{A Comarative Analysis of PMX, CX and OX Crossover operators for solving Travelling Salesman Problem}, [ogled 13.~12.~2018], dostopno na \url{http://www.mnkjournals.com/ijlrst_files/Download/Vol%201%20Issue%202/303-%20Naveen.pdf}.
+
+\end{thebibliography}
+
+
+
+
+
+
+\end{document}
