@@ -6,17 +6,14 @@ import math
 
 #Naredimo slovar z mesti
 
-def mesta(slovar_mest):
-    n = len(slovar_mest)
-    utezi = [[0 for i in range(n)] for i in range(n)]
+def mesta(mesta):
+    n = len(mesta)
+    utezi = np.zeros((n, n))
     
     for i in range(n):
         for j in range(i+1, n):
-            print(i,j)
-            print(slovar_mest[0][1])
-            utezi[i][j] = ((slovar_mest[i][0]-slovar_mest[j][0])**2 + (slovar_mest[i][1]-slovar_mest[j][1])**2)**(1/2)
-            print(utezi)
-            utezi[j-1][i-1] = utezi[i-1][j-1]
+            utezi[i][j] = ((mesta[i][0] - mesta[j][0])**2 + (mesta[i][1] - mesta[j][1])**2)**(1/2)
+            utezi[j][i] = utezi[i][j]
             
     return(utezi)
 
@@ -235,7 +232,12 @@ poti = populacija(10, cene)
 k = 4
 mut = 0.02
 p = ga_tsp(1000 , cene, poti, mut, k, ox)
-print(p)
+#print(p)
 
-nas_slovar = {"mesto1" : [2,5], "mesto2" : [3,7]}
-print(nas_slovar["mesto1"])
+#m = [[2,5], [3,7]]
+#print(mesta(m))
+
+primer = [[60, 200], [180, 200], [80, 180], [140, 180], [20, 160], [100, 160], [200, 160], [140, 140], [40, 120], [100, 120], [180, 100], [60, 80], [120, 80], [180, 60], [20, 40], [100, 40], [200, 40], [20, 20], [60, 20], [160, 20]]
+ce = mesta(primer)
+po = populacija(50, ce)
+print(dolzinaPoti(ga_tsp(100, ce, po, 0.015, 5, ox), ce))
