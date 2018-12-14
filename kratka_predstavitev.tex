@@ -1,0 +1,70 @@
+\documentclass[a4paper]{article}
+\usepackage[slovene]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{enumerate}
+\usepackage{mathpazo} 
+\usepackage{blindtext}
+
+\title{Genetski algoritem na problemu potujočega trgovca}
+\author{Tina Bertok\\ Neža Habjan \\ Gašper Letnar}
+
+\begin{document}
+\maketitle
+\newpage
+
+\section{Uvod}
+
+Naša naloga je, da implementiramo genetski algoritem na problem potujočega trgovca. Pri tem bomo uporabljali različna križanja, velikosti populacije in verjetnostmi za mutacijo. Opazovali bomo, kako se spreminja rezultat glede na spreminjanje spremenljivk in pogojev. Prav tako bomo nekaj testnih grafov generirali sami, ter jih nato primerjali s tistimi, najdenimi na internetu. 
+\\
+\\
+\textit{Genetski algoritem} je metahevristika, navdihnjena s strani procesov naravne selekcije in spada v razred razvojnih
+algoritmov. Uporablja se za generiranje kvalitetnih rešitev v optimizaciji, ki temeljijo na operatorjih kot so mutacija, križanje
+in selekcija.  
+\\
+V genetskem algoritmu se uporabi množica kandidatov za rešitev, ki jih nato razvijamo do optimalne rešitve. Vsak kandidat
+ima določene lastnosti, katere lahko spremenimo oziroma lahko mutirajo. Evolucija rešitev se ponavadi začne na naključni izbiri kandidatov, katere potem s pomočjo iteracije razvijamo. Na vsakem iterativnem koraku se potem oceni primernost novih kandidatov za optimizacijski problem. Najboljše kandidate potem uporabimo za naslednji korak iteracije. Na koncu se algoritem zaključi, ko doseže maksimalno število iteracijskih korakov oziroma, ko dobi najboljši približek optimalni rešitvi.
+\\
+\\
+\textit{Problem trgovskega potnika} oz. \textit{traveling salesman problem (TSP)} je NP-težek problem v kombinatorični optimizaciji pomemben pri operacijskih raziskavah, matematični optimizaciji in teoretičnemu računalništvu. Trgovski potnik mora obiskati določeno množico mest tako, da bo pri tem prehodil čim krajšo pot in se vrniti v izhodišče.
+
+
+\newpage
+\section{Potek in opis dela}
+
+Že dobro poznan problem potujočega , smo se odločili predstaviti z grafom v obliki $n x n$ matrike cen povezav. Graf smo generirali tako, da smo elemente matrike, ki predstavljajo celoštevilske cene povezav izbrali naključno. 
+\\
+Nato je bilo potrebno definirati \textit{ciljno funkcijo} oz. \textit{fitness function}, ki bo v naštem primeru predstavljala dolžino najcenejše poti v grafu. 
+\\
+\\
+Naključno smo ustvarili začetno popoulacijo določene velikosti. Vsak element populacije ali \textit{kromosom} predstavloja neko pot, ki obišče vsa vozlišča grafa. 
+\\
+\\
+V nadaljevanju izberemo starše, ki jih damo v paritveni bazen. Za selekcijo imamo dve možnosti, in sicer selekcijo s turnirjem ter proporcionalno selekcijo. Odločili smo se, da bomo bazen gradili turnirsko. To pomeni, da bomo iz populacije naključno izbrali k kromosomov oz. poti. Naša funkcija oz. \textit{selekcija} nam bo vrnila zmagovalca kot pot z najkrajšo dolžino in pripadajočo dolžino. Torej bomo za $n$ staršev v bazenu imeli $n$ turnirjev. Število kromosomov v turnirju $k$ izberemo sami, vendar moramo biti pri tem predvidni. Večji kot je $k$, hitrejša bo konvergenca, kar pa ni nujno dobro. Najboljše starše (tiste, ki so največkrat zmagali) bomo dali v paritveni bazen.
+\\
+\\
+Za ustvarjanje otrok bomo uporabili različna križanja oz. \textit{crossoverje} staršev (poti) iz paritvenega bazena.
+\\
+\\
+Različne variacije križanj:
+ \begin{itemize}
+
+\item urejeno križanje oz. \textit{ordered crossover}
+\item delno mapirano križanje oz.\textit{ partially mapped crossover}
+\item ciklično križanje oz. \textit{cycle crossover}
+
+ \end{itemize}
+
+Tako bomo dobili otroke, ki so že izboljšani primeri poti. Da pa ohranjamo diverziteto v populaciji, si moramo med temi otroci izbrati določen procent, ki ga bomo mutirali z \textit{SWAP mutacijo} (zamenjali bomo dve vozlišči v poti). Vsako vozlišče z neko verjetnostjo mutiramo, torej zamenjamo položaj mutiranega vozlišča z nekim naključnim vozliščem na poti. 
+
+\newpage
+\section{Načrt za nadaljnje delo}
+
+V nadaljevanju imamo namen naš program preizkusiti na različnih velikostih populacije in primerjati rezultate. Prav tako bomo opazovali, kaj se spremeni, če uporabimo drugačno različico križanja. Postavili si bomo tudi vprašanje, kakšen bo rezultat, če povečamo verjetnost mutacije. 
+
+
+
+\end{document}
