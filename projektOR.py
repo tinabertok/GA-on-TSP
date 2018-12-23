@@ -76,7 +76,7 @@ def turnir(populacija, kTurnir):
 # v vrstnem redu 3. podzaporedje, 1. podazporedje, 2. podzaporedje. Seveda izkljucimo tista vozlisca, ki so ze vsebovana. Ko pridemo do konca,
 # nadaljujemo se od zacetka do a-tega mesta. Enako za drugega potomca, le da vlogi starsev zamenjamo.
 
-def ox(stars1, stars2):
+def OX(stars1, stars2):
     dolzina = len(stars1)
     
     rez_a = random.randint(1,len(stars1))
@@ -226,34 +226,44 @@ def povprecje(ponovitve, stGeneracij, utezi, populacija, verjMutacije, kTurnir, 
     return(vsota/ponovitve)
 
 
+
+#funkcija, ki nakljuèno izbere križanje
+
+def nakljucno_krizanje(stars1, stars2):
+    R = [OX, PMX, CX]
+    return random.choice(R)(stars1, stars2)
+
 ##########################################################################################################################################
 
 cene = utezi(5, 100)
 poti = populacija(10, cene)
 k = 4
 mut = 0.02
-p = ga_tsp(1000 , cene, poti, mut, k, ox)
+p = ga_tsp(1000 , cene, poti, mut, k, OX)
 
 primer = [[60, 200], [180, 200], [80, 180], [140, 180], [20, 160], [100, 160], [200, 160], [140, 140], [40, 120], [100, 120], [180, 100], [60, 80], [120, 80], [180, 60], [20, 40], [100, 40], [200, 40], [20, 20], [60, 20], [160, 20]]
 ce = mesta(primer)
-#print(dolzinaPoti(ga_tsp(100, ce, po, 0.015, 5, ox), ce))
-#print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+#print(dolzinaPoti(ga_tsp(100, ce, po, 0.015, 5, OX), ce))
+#print(povprecje(100, 100, ce, po, 0.015, 5, OX))
 
 def main():
     po = populacija(10, ce)
     print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 10 in čas izvedbe 100 ponovitev:")
     start_time = time.time()
-    print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
     print("--- %s seconds ---" % (time.time() - start_time))
     
     po = populacija(20, ce)
     print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 20 in čas izvedbe 100 ponovitev:")
     start_time = time.time()
-    print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
     print("--- %s seconds ---" % (time.time() - start_time))
     
     po = populacija(50, ce)
     print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 20 in čas izvedbe 100 ponovitev:")
     start_time = time.time()
-    print(povprecje(100, 100, ce, po, 0.015, 5, ox))
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
     print("--- %s seconds ---" % (time.time() - start_time))
+
+
+    
