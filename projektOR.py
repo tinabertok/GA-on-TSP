@@ -80,7 +80,7 @@ def OX(stars1, stars2):
     dolzina = len(stars1)
     
     rez_a = random.randint(1,len(stars1))
-    rez_b = random.randint(1,len(stars1))
+    rez_b = random.randint(rez_a,len(stars1)) #funkcija vzame rez_a in rez_b v odnosu rez_a <= rez_b
     
     ostanek1 = stars2[rez_b:] + stars2[:rez_b]
     for vozl in stars1[rez_a:rez_b]:
@@ -92,7 +92,7 @@ def OX(stars1, stars2):
         ostanek2.remove(vozl)
     otrok2 = ostanek2[dolzina - rez_b:] + stars2[rez_a:rez_b] + ostanek2[:dolzina - rez_b]
     
-    return(otrok1, otrok2)
+    return(rez_a, rez_b, otrok1, otrok2)
 
 
 
@@ -106,7 +106,7 @@ def OX(stars1, stars2):
 def PMX(stars1, stars2):
 	l=len(stars1)
 	rez_c = random.randint(1,len(stars1))
-	rez_d = random.randint(1,len(stars1))
+	rez_d = random.randint(rez_c,len(stars1)) #funkcija vzame rez_c in rez_d v odnosu rez_c <= rez_d
     
 	izrez1 = stars1[rez_c:rez_d]
 	izrez2 = stars2[rez_c:rez_d]
@@ -126,7 +126,7 @@ def PMX(stars1, stars2):
 	for j in range(l):
 		if otrok1[j]==0:
 		       otrok1[j]=stars2[j]
-	return(otrok1)
+	return(rez_c, rez_d, otrok1)
 
 #algoritem deluje tudi za robne vrednosti, torej ko je rez_c=0, rez_d=ln oziroma, kadar sta oba reza enaka. 
 #problem se pojavi pri definiranju otroka, kot seznam ničel, v primeru da je kateri od elementov v starših ničeln. Ali nas to moti?
