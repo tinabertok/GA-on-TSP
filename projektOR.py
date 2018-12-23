@@ -247,6 +247,8 @@ ce = mesta(primer)
 #print(povprecje(100, 100, ce, po, 0.015, 5, OX))
 
 def main():
+
+    ########## Primerjava velikosti populacije
     po = populacija(10, ce)
     print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 10 in čas izvedbe 100 ponovitev:")
     start_time = time.time()
@@ -260,10 +262,250 @@ def main():
     print("--- %s seconds ---" % (time.time() - start_time))
     
     po = populacija(50, ce)
-    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 20 in čas izvedbe 100 ponovitev:")
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 50 in čas izvedbe 100 ponovitev:")
     start_time = time.time()
     print(povprecje(100, 100, ce, po, 0.015, 5, OX))
     print("--- %s seconds ---" % (time.time() - start_time))
 
+    ########### Primerjava crossoverjev
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 10 in čas izvedbe 100 ponovitev pri razlicnih krizanjih")
+    po = populacija(10, ce)
+    print("Urejeno krizanje (OX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Delno mapirano krizanje (PMX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Ciklicno krizanje (CX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 20 in čas izvedbe 100 ponovitev pri razlicnih krizanjih")
+    po = populacija(20, ce)
+    print("Urejeno krizanje (OX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Delno mapirano krizanje (PMX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Ciklicno krizanje (CX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
 
     
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 50 in čas izvedbe 100 ponovitev pri razlicnih krizanjih")
+    po = populacija(50, ce)
+    print("Urejeno krizanje (OX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Delno mapirano krizanje (PMX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Ciklicno krizanje (CX):")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+
+    ####### Primerjava verjetnosti mutacije
+    
+    print("Povprečna pot 100 ponovitev algoritma na populacij velikosti 10 in čas izvedbe 100 ponovitev pri razlicnih verjetnostih mutacije")
+    #populacija velikosti 10, OX
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 1,5%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    #populacije velikosti 10, PMX
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 1,5%")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    #populacija velikosti 10, CX
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 1,5%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(10, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    
+    #populacije velikosti 20, OX
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 1,5%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+
+    #populacije velikosti 20, PMX
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 1,5%")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    #populacija velikosti 20, CX
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 1,5%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(20, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+    
+    #populacije velikosti 50, OX
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 1,5%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, OX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+
+    #populacije velikosti 50, PMX
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 1,5%")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, PMX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    #populacija velikosti 50, CX
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 1%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.01, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 1,5%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.015, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
+
+    po = populacija(50, ce)
+    print("Verjetnost mutacije 2%:")
+    start_time = time.time()
+    print(povprecje(100, 100, ce, po, 0.02, 5, CX))
+    print("--- %s seconds ---" % (time.time() - start_time))
