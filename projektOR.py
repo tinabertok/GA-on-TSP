@@ -298,11 +298,30 @@ def najkrajsaPot(nasledniki):
             
     return(pot)
 
+# Izvede se genetski algoritem.
 def gaTsp(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover):
     nasledniki = populacija
     for _ in range(stGeneracij):
         nasledniki = potomci(utezi, nasledniki, verjMutacije, kTurnir, crossover)
     return(najkrajsaPot(nasledniki))
+
+# Narise graf poti.
+def narisi(pot, lokacije):
+    plt.figure()
+    for stMest in range(len(pot)):
+        if stMest != 0:
+            sedanje = pot[stMest]
+            a2, b2 = a1, b1
+            a1, b1 = lokacije[sedanje-1][0], lokacije[sedanje-1][1]
+            plt.plot([a1, a2], [b1, b2])
+        else:
+            prejsnje = pot[len(pot)-1]
+            sedanje = pot[0]
+            a2, b2 = lokacije[prejsnje-1][0], lokacije[prejsnje-1][1]
+            a1, b1 = lokacije[sedanje-1][0], lokacije[sedanje-1][1]
+            plt.plot([a1, a2], [b1, b2])
+        plt.scatter(lokacije[sedanje-1][0], lokacije[sedanje-1][1])
+    plt.show()
 
 # Risanje grafov, parameter kGraf doloca, na vsake koliko se narise graf.   
 def gaTspGraf(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover, kGraf, koordinate):
@@ -313,22 +332,7 @@ def gaTspGraf(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover, 
         if (i+1)%kGraf == 0:
             plt.figure()
             pot = najkrajsaPot(nasledniki)
-           
-            for stMest in range(len(pot)):
-                if stMest != 0:
-                    sedanje = pot[stMest]
-                    a2, b2 = a1, b1
-                    a1, b1 = koordinate[sedanje-1][0], koordinate[sedanje-1][1]
-                    plt.plot([a1, a2], [b1, b2])
-                else:
-                    prejsnje = pot[len(pot)-1]
-                    sedanje = pot[0]
-                    a2, b2 = koordinate[prejsnje-1][0], koordinate[prejsnje-1][1]
-                    a1, b1 = koordinate[sedanje-1][0], koordinate[sedanje-1][1]
-                    plt.plot([a1, a2], [b1, b2])
-                    
-                plt.scatter(koordinate[sedanje-1][0], koordinate[sedanje-1][1])
-            plt.show()
+            narisi(pot, koordinate)
             
     return(najkrajsaPot(nasledniki))
     
@@ -365,12 +369,14 @@ def main():
     # primerjava rezultatov pri razlicnih vrednostih parametrov za problem ulysses22
     # ostala primera: berlin52 in kroa100
     
-    data = "berlin52.txt"
-    dataPot = "berlin52opt.txt"
+    data = "ulysses22.txt"
+    dataPot = "ulysses22opt.txt"
     
     lokacije = preberi(data)
-    razdalje = mesta(lokacije) ## nastavi na mestaGeo ce uporabljas ulysses22
+    razdalje = mestaGeo(lokacije) ## nastavi na mestaGeo ce uporabljas ulysses22
     najkrajsa = najkrajsaConcord(dataPot)
+    
+    narisi(najkrajsa, lokacije)
     
     print("Najkrajša pot iz datoteke " + data + " je: \n \n" + str(najkrajsa) + "\n\nin njena dolžina je: " + str(dolzinaPoti(najkrajsa, razdalje)) + ". \n")
     
@@ -388,22 +394,20 @@ def main():
     verj_mutacije = [0, 0.015, 0.1]
     pop_velikost = [10, 20, 50]
     
-    # graf
-    pop = populacija(10, razdalje)
-    gaTspGraf(20, razdalje, pop, 0.015, 5, OX, 5, lokacije)
-    
-    for g in st_generacij:
-        for v in verj_mutacije:
-            for p in pop_velikost:
-                print("\n--------------------------------------------------------------\n")
-                print("Število generacij: " + str(g) + ", verjetnost mutacije: " + str(v) + ", velikost populacije: " + str(p))
-                pop = populacija(p, razdalje)
-                start_time = time.time()
-                rezultat = povprecje(st_ponovitev, g, razdalje, pop, v, k_turnir, CO)
-                print("Pretečeni čas:\n")
-                print("--- %s seconds ---" % (time.time() - start_time))
-                print("\nPovprečna pot v " + str(st_ponovitev) + " ponovitvah algoritma je " + str(rezultat[0]) + ".\n")
-                print("Dolžina najkrajše najdene poti v " + str(st_ponovitev) + " ponovitvah algoritma je: " + str(rezultat[1][1]) + ".")
+# =============================================================================
+#     for g in st_generacij:
+#         for v in verj_mutacije:
+#             for p in pop_velikost:
+#                 print("\n--------------------------------------------------------------\n")
+#                 print("Število generacij: " + str(g) + ", verjetnost mutacije: " + str(v) + ", velikost populacije: " + str(p))
+#                 pop = populacija(p, razdalje)
+#                 start_time = time.time()
+#                 rezultat = povprecje(st_ponovitev, g, razdalje, pop, v, k_turnir, CO)
+#                 print("Pretečeni čas:\n")
+#                 print("--- %s seconds ---" % (time.time() - start_time))
+#                 print("\nPovprečna pot v " + str(st_ponovitev) + " ponovitvah algoritma je " + str(rezultat[0]) + ".\n")
+#                 print("Dolžina najkrajše najdene poti v " + str(st_ponovitev) + " ponovitvah algoritma je: " + str(rezultat[1][1]) + ".")
+# =============================================================================
     
     ## Opazimo, da se z vecanjem stevila generacij in velikosti populacije resitve izboljsujejo. Seveda pa z vecanjem teh parametrov povecujemo
     ## tudi cas, ki ga algoritem potrebuje za izracun. Kar se tice verjetnosti mutacije pa pri vrednosti 0.015 dobimo najboljse rezultate. 
