@@ -193,7 +193,9 @@ def PMX(stars1, stars2):
 	izrez1 = stars1[rez_c:rez_d]
 	izrez2 = stars2[rez_c:rez_d]
 	otrok1 = [0]*l
+	otrok2 = [0]*l
 	otrok1[rez_c:rez_d]=izrez1
+	otrok2[rez_c:rez_d]=izrez2
 	u=0
 	v=0
 	for i in izrez2:
@@ -208,7 +210,20 @@ def PMX(stars1, stars2):
 	for j in range(l):
 		if otrok1[j]==0:
 		       otrok1[j]=stars2[j]
-	return(otrok1)
+	for i in izrez1:
+		if i not in izrez2:
+			u=stars1.index(i)
+			par_u=stars2[u]
+			while par_u in izrez1:
+				v=stars1.index(par_u)
+				par_u=stars2[v]
+			mesto=stars1.index(par_u)
+			otrok2[mesto]=i
+	for j in range(l):
+		if otrok2[j]==0:
+		       otrok2[j]=stars1[j]
+	
+	return(otrok1, otrok2)
 
 #algoritem deluje tudi za robne vrednosti, torej ko je rez_c=0, rez_d=ln oziroma, kadar sta oba reza enaka. 
 #problem se pojavi pri definiranju otroka, kot seznam ničel, v primeru da je kateri od elementov v starših ničeln. Ali nas to moti?
