@@ -2,6 +2,10 @@ import random
 import numpy as np
 import math
 import time
+import matplotlib.pyplot as plt
+from cycler import cycler
+
+plt.rcParams['axes.prop_cycle'] = cycler(color='k')
 
 # Prebere .txt datoteko dobljeno iz elib.zib.de, kjer so podatki iz TSPLIB - knjiznica z nekaterimi problemi potujocega trgovca in
 # optimumi reseni s Concord TSP solverjem. Izbrali smo 3 probleme, in sicer ulysses22.txt, berlin52.txt in kroal100.txt. Vrne
@@ -284,6 +288,34 @@ def gaTsp(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover):
     for _ in range(stGeneracij):
         nasledniki = potomci(utezi, nasledniki, verjMutacije, kTurnir, crossover)
     return(najkrajsaPot(nasledniki))
+
+# Risanje grafov, parameter kGraf doloca, na vsake koliko se narise graf.   
+def gaTspGraf(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover, kGraf, koordinate):
+    nasledniki = populacija
+    for i in range(stGeneracij):
+        nasledniki = potomci(utezi, nasledniki, verjMutacije, kTurnir, crossover)
+
+        if (i+1)%kGraf == 0:
+            plt.figure()
+            pot = najkrajsaPot(nasledniki)
+           
+            for stMest in range(len(pot)):
+                if stMest != 0:
+                    sedanje = pot[stMest]
+                    a2, b2 = a1, b1
+                    a1, b1 = koordinate[sedanje-1][0], koordinate[sedanje-1][1]
+                    plt.plot([a1, a2], [b1, b2])
+                else:
+                    prejsnje = pot[len(pot)-1]
+                    sedanje = pot[0]
+                    a2, b2 = koordinate[prejsnje-1][0], koordinate[prejsnje-1][1]
+                    a1, b1 = koordinate[sedanje-1][0], koordinate[sedanje-1][1]
+                    plt.plot([a1, a2], [b1, b2])
+                    
+                plt.scatter(koordinate[sedanje-1][0], koordinate[sedanje-1][1])
+            plt.show()
+            
+    return(najkrajsaPot(nasledniki))
     
 # Pri danih ponovitvah genetskega algoritma izracuna povprecno dobljeno dolzino najkrajse poti. Zraven pa se najkrajso pot v vseh ponovitvah, ter njeno dolzino.
 
@@ -314,14 +346,15 @@ def nakljucno(stars1, stars2):
 # zazeni main z ukazom v konzoli: main()
     
 def main():
-    
+
     # primerjava rezultatov pri razlicnih vrednostih parametrov za problem ulysses22
+    # ostala primera: berlin52 in kroa100
     
-    data = "ulysses22.txt"
-    dataPot = "ulysses22opt.txt"
+    data = "berlin52.txt"
+    dataPot = "berlin52opt.txt"
     
     lokacije = preberi(data)
-    razdalje = mestaGeo(lokacije)
+    razdalje = mesta(lokacije) ## nastavi na mestaGeo ce uporabljas ulysses22
     najkrajsa = najkrajsaConcord(dataPot)
     
     print("Najkrajša pot iz datoteke " + data + " je: \n \n" + str(najkrajsa) + "\n\nin njena dolžina je: " + str(dolzinaPoti(najkrajsa, razdalje)) + ". \n")
@@ -339,6 +372,10 @@ def main():
     st_generacij = [50, 200]
     verj_mutacije = [0, 0.015, 0.1]
     pop_velikost = [10, 20, 50]
+    
+    # graf
+    pop = populacija(10, razdalje)
+    gaTspGraf(20, razdalje, pop, 0.015, 5, OX, 5, lokacije)
     
     for g in st_generacij:
         for v in verj_mutacije:
@@ -359,3 +396,5 @@ def main():
     ## saj s tem izgubljamo nase zgrajene resitve.
     ## Pri - Število generacij: 200, verjetnost mutacije: 0.015, velikost populacije: 50 - je najkrajsa dobljena pot dolga 7087, ce to primerjamo
     ## z optimumo 7013 je to zelo blizu.
+    ## Ko podobno testiramo na berlin 52, je dolzina najkrajse poti pri - Število generacij: 200, verjetnost mutacije: 0.015, velikost populacije: 50 - 
+    ## enaka 9642, kar je ze bolj oddaljeno od optimuma pri 7544.
