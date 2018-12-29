@@ -123,8 +123,11 @@ Pri programiranju in pisanju algoritma smo se odločili za programski jezik Pyth
 
 \newpage
 \section{Opis dela}
-
-
+\
+\subsection{Osnovne funkcije}
+\
+\\
+\\
 Že dobro poznan problem potujočega , smo se odločili predstaviti z grafom v obliki $n \times n$ matrike cen povezav. Graf smo generirali tako, da smo elemente matrike, ki predstavljajo celoštevilske cene povezav, izbrali naključno. To je prikazano v spodnji funkciji \textit{utezi(n, maxCena)}.
 
 \begin{figure*}[ht]
@@ -145,6 +148,7 @@ Naključno smo ustvarili začetno populacijo izbrane velikosti. Vsak element pop
 \centering
 \includegraphics[width=1\textwidth]{populacija}
 \end{figure*}
+\newpage
 V nadaljevanju izberemo starše, katerih gene bomo uporabili za nastanek naslednje generacije - določimo paritveni bazen. Tega se bomo lotili postopoma in sicer izbiramo po 2 starša za 2 otroka. Za selekcijo imamo dve možnosti, in sicer selekcijo s turnirjem ter proporcionalno selekcijo. Odločili smo se za turnirsko. Vsakega starša bomo izbrali tako, da bomo iz trenutne populacije naključno izbrali  $k$ kromosomov oz. poti. Naša funkcija oz. \textit{selekcija} nam bo vrnila zmagovalca izmed teh  $k$ poti oziroma pot z najkrajšo dolžino. Torej bomo za $n$ staršev v bazenu imeli $n$ turnirjev.
 
 \begin{figure*}[ht]
@@ -152,11 +156,13 @@ V nadaljevanju izberemo starše, katerih gene bomo uporabili za nastanek nasledn
 \includegraphics[width=1\textwidth]{turnir}
 \end{figure*}
 
-\pagebreak
-
+\subsection{Križanja oziroma crossoverji}
+\
+\\
+\\
 Za ustvarjanje otrok bomo uporabili različna križanja oz. \textit{crossoverje} staršev (poti) iz paritvenega bazena. Pri tem smo uporabili različne variacije križanj: 
 \\
-\subsection{Urejeno križanje ali ordered crossover}
+\subsubsection{Urejeno križanje ali ordered crossover}
 \
 \\
 \\
@@ -167,25 +173,57 @@ Na enak način tvorimo drugega otroka, le da vlogi staršev zamenjamo.
 \centering
 \includegraphics[width=1\textwidth]{OX}
 \end{figure*}
-
-\subsection{Delno mapirano križanje ali partially mapped crossover}
+\newpage
+\subsubsection{Delno mapirano križanje ali partially mapped crossover}
 \
 \\
 \\
 Drugi način križanja je delno mapirano križanje ali PMX, v katerem starša spet razdelimo na tri podzaporedja. Prvemu otroku prav tako kot v OX, prepišemo vrednosti prvega starša med obema rezoma, se pravi 2. podzaporedje. Nato vsako vozlišče(vsaka vrednost i) iz 2. podzaporedja drugega starša, ki še ni vsebovano v zaporedju otroka, dobi svoj istoležeči par v prvem staršu. Če je ta par že vsebovan v 2. podzaporedju drugega starša, temu vozlišču ponovno poiščemo par iz prvega starša in to počnemo dokler dobljeni istoležeči par v drugem staršu ne leži izven 2. podzaporedja.  Takrat na njegovo mesto (v drugem staršu) zapišemo vrednost i. Na koncu postopka vsa prazna mesta v otroku zapolnimo z istoležečimi vozlišči iz drugega starša. 
 
-
-
-\subsection{Ciklično križanje ali cycle crossover}
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{PMX}
+\end{figure*}
+\newpage
+\subsubsection{Ciklično križanje ali cycle crossover}
 \
 \\
 \\
 Zadnji način križanja, ki smo ga uporabili je ciklično križanje ali CX. Tu naša funkcija sprejme dva starša, iz katerih naredi slovar. Pri tem prvi starš predstavlja ključ, drugi pa vrednost. Najprej poiščemo vse ciklje med staršema in jih shranimo v množico A. Prvega otroka tvorimo tako, da mu po vrsti dodamo vsak sodi cikel iz prvega stašra in vsak lihi cikel iz drugega starša. Pri drugem otroku ravnamo ravno obratno.  
 
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{CX}
+\end{figure*}
 
-Tako bomo dobili otroke, ki so neke nove poti ustvarjene iz dveh staršev. Da pa ohranjamo diverziteto v populaciji, bodo nekatere poti mutirane in sicer s \textit{SWAP mutacijo} (zamenjali bomo dve vozlišči v poti). Vsako vozlišče poti z neko verjetnostjo mutiramo, torej zamenjamo položaj mutiranega vozlišča z nekim naključnim vozliščem te poti. 
+\subsection{Mutacije}
+\
+\\
+\\
+S križanji smo dobili otroke, ki so neke nove poti ustvarjene iz dveh staršev. Da pa ohranjamo diverziteto v populaciji, je potrebno nekatere poti mutirati in sicer s \textit{SWAP mutacijo} (zamenjali bomo dve vozlišči v poti). Vsako vozlišče poti z neko verjetnostjo mutiramo, torej zamenjamo položaj mutiranega vozlišča z nekim naključnim vozliščem te poti. 
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{mutacija}
+\end{figure*}
+\newpage
+Ker pa lahko potomce dobivamo na več načinov, se pravi z različnimi križanji smo za tvorbo potomcev napisali posebno funkcijo, ki sprejme več parametrov, med njimi tudi verjetnost mutacije in način križanja. 
 
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{potomci}
+\end{figure*}
+Cilj našega genetskega algoritma je najti najkrajšo pot, ki nam jo izračuna naslednja funkcija. 
 
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{najkrajsapot}
+\end{figure*}
+
+Po pridobitvi vseh potrebnih podatkov, lahko na tej točki poženemo naš genetski algoritem, ki nam izmed vseh poti iz dane generacije vrne najboljšo se pravi najkrajšo. 
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{gatsp}
+\end{figure*}
 \newpage
 \section{Zaključek}
 
