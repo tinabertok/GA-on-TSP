@@ -47,7 +47,7 @@ def mesta(mesta):
             
     return(utezi)
     
-# Izracune razdalje za GEO lokacije. Formula dobljena s strani: https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/TSPFAQ.html
+# Izracuna razdalje za GEO lokacije. Formula dobljena s strani: https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/TSPFAQ.html
 
 # podatki pri probemu ulysses22 so podani v GEO lokacijah
     
@@ -178,7 +178,7 @@ def OX(stars1, stars2):
 
 
 
-#drugi crossover postopek, vhodna podatka sta dva starša in dva reza c in d
+#drugi crossover postopek, vhodna podatka sta dva starša
 #prvemu otroku prepišemo vrednosti prvega starša med obema rezoma
 #vsaka vrednost i iz izreza drugega starša, ki ni v izrezu prvega, dobi svoj istoležeči par v prvem staršu. Če je ta par že vsebovan v izrezu drugega,
 #tej vrednosti zopet poiščemo par iz prvega starša in to počnemo dokler dobljeni istoležeči par v drugem staršu ne leži izven izreza. 
@@ -398,3 +398,5 @@ def main():
     ## z optimumo 7013 je to zelo blizu.
     ## Ko podobno testiramo na berlin 52, je dolzina najkrajse poti pri - Število generacij: 200, verjetnost mutacije: 0.015, velikost populacije: 50 - 
     ## enaka 9642, kar je ze bolj oddaljeno od optimuma pri 7544.
+
+
