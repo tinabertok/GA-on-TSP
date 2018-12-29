@@ -391,8 +391,12 @@ def main():
     
     #spremenljivke
     st_generacij = [50, 200]
-    verj_mutacije = [0, 0.015, 0.1]
+    verj_mutacije = [0, 0.015, 0.04]
     pop_velikost = [10, 20, 50]
+    
+    pop = populacija(50, razdalje)
+    rezultat = povprecje(st_ponovitev, 200, razdalje, pop, 0.015, k_turnir, OX)
+    narisi(rezultat[1][0], lokacije)
     
 # =============================================================================
 #     for g in st_generacij:
@@ -417,8 +421,3 @@ def main():
     ## z optimumo 7013 je to zelo blizu.
     ## Ko podobno testiramo na berlin 52, je dolzina najkrajse poti pri - Število generacij: 200, verjetnost mutacije: 0.015, velikost populacije: 50 - 
     ## enaka 9642, kar je ze bolj oddaljeno od optimuma pri 7544.
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 3a6c144b4948ac4258b22f2a9bb016ca84b54eb3
