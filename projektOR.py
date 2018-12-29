@@ -279,7 +279,15 @@ def potomci(utezi, populacija, verjMutacije, kTurnir, crossover):
         stars1 = turnir(populacija, kTurnir)
         stars2 = turnir(populacija, kTurnir)
         
-        otroka = crossover(stars1, stars2)
+        if crossover == "OX":
+            otroka = OX(stars1, stars2)
+        elif crossover == "PMX":
+            otroka = PMX(stars1, stars2)
+        elif crossover == "CX":
+            otroka = CX(stars1, stars2)
+        else:
+            otroka = nakljucno(stars1, stars2)
+        
         otrok1 = mutacija(otroka[0], verjMutacije)
         otrok2 = mutacija(otroka[1], verjMutacije)
         
@@ -369,11 +377,11 @@ def main():
     # primerjava rezultatov pri razlicnih vrednostih parametrov za problem ulysses22
     # ostala primera: berlin52 in kroa100
     
-    data = "ulysses22.txt"
-    dataPot = "ulysses22opt.txt"
+    data = "kroa100.txt"
+    dataPot = "kroa100opt.txt"
     
     lokacije = preberi(data)
-    razdalje = mestaGeo(lokacije) ## nastavi na mestaGeo ce uporabljas ulysses22
+    razdalje = mesta(lokacije) ## nastavi na mestaGeo ce uporabljas ulysses22
     najkrajsa = najkrajsaConcord(dataPot)
     
     narisi(najkrajsa, lokacije)
@@ -383,7 +391,7 @@ def main():
     # OX
     # spremeni vrednost CO na PMX, CX ali nakljucno, da dobis rezultate za ostala krizanja
     
-    CO = OX
+    CO = "OX"
     
     #fiksno
     st_ponovitev = 20
@@ -394,9 +402,10 @@ def main():
     verj_mutacije = [0, 0.015, 0.04]
     pop_velikost = [10, 20, 50]
     
-    pop = populacija(50, razdalje)
-    rezultat = povprecje(st_ponovitev, 200, razdalje, pop, 0.015, k_turnir, OX)
-    narisi(rezultat[1][0], lokacije)
+    pop = populacija(100, razdalje)
+    rezultat = gaTsp(1000, razdalje, pop, 0.005, k_turnir, "OX")
+    narisi(rezultat, lokacije)
+    print(dolzinaPoti(rezultat, razdalje))
     
 # =============================================================================
 #     for g in st_generacij:
