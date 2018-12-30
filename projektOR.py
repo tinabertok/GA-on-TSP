@@ -430,3 +430,36 @@ def main():
     ## z optimumo 7013 je to zelo blizu.
     ## Ko podobno testiramo na berlin 52, je dolzina najkrajse poti pri - Število generacij: 200, verjetnost mutacije: 0.015, velikost populacije: 50 - 
     ## enaka 9642, kar je ze bolj oddaljeno od optimuma pri 7544.
+
+#Analiza spreminjanja rezultatov pri različnih parametrih:
+#kroa100:
+#ob večanju velikosti populacije se dolžina najkrajše poti še kar hitro bliža optimumu, čeprav so začetne vrednosti tudi več kot dvakratniki optimalne vrednosti.
+#Opazimo tudi, da je pri večjem številu generacij najkrajša pot dvakrat daljša kot če število generacij nastavimo na 1000.
+#ulysses22:
+#enako gibanje opazimo tdi pri primeru ulysses22, le da je konvergenca k optimumu tu precej hitrejša, saj se vrednosti ne povečajo občutneje, kljub spremembi števila generacij.
+#prvi dve primerjavi sta bili opravljeni pri ordered crossover metodi, sedaj pa preizkusimo še ostali dve, in sicer na primeru
+#berlin52:
+#vidimo, da pri metodi CX dobimo precej počasno konvergenco pri uporabi mutacije 0. Vrednosti se namreč dvignejo tudi nad trikratnik optimuma.
+#vseeno pa opazimo enak trend, bližamo se optimalni rešitvi če večamo število generacij in velikost populacije.
+#če verjetnost mutacije povečamo na 0.005, se vrednosti najkrajše poti gibljejo od dvakratnika optimuma navzdol, kar je precej bolje, in sicer tudi bolje od uporabe mutacije 0.04, kjer je konvergenca zopet nekoliko počasnejša.
+#pri uporabi PMX metode opazimo, da se vrednosti vsaj pri ničelni mutaciji hitreje približujejo optimumu. zopet nam najboljše rezultate daje mutacija 0.005, vrednosti se izboljšujejo tudi z večanjem
+#števila generacij in z večanjem populacije.
+#zanimiva je tudi uporaba metode OX, pri kateri dobimo občutno boljše rezultate z uporabo mutacije 0.005, pri ostalih dveh verjetnostih mutacij pa so približki v splošnem slabši in so bolj odmaknjeni od optimuma kot pri PMX in CX.
+#zaključek:
+#Opazimo torej, da prevelik delež mutirane populacije slabša rešitev problema. To smo lahko videli pri uporabi katerekoli metode križanja.
+#pri primerjavi metod križanja ugotovimo, da je v splošnem najhitrejša metoda OX. Pri mutacijski verjetnosti 0 namreč na začetku dosega zelo slabe rezultate, ki so močno oddaljeni od optimalne rešitve,
+#a le te z večanjem populacije lahko zelo hitro znižamo, torej je konvergenca vseeno precej hitra.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
