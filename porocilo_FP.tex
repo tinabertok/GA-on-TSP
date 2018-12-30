@@ -196,6 +196,18 @@ Zadnji način križanja, ki smo ga uporabili je ciklično križanje ali CX. Tu n
 \includegraphics[width=1\textwidth]{CX}
 \end{figure*}
 
+\subsubsection{Naključno izbrano križanje}
+\
+\\
+\\
+Da bi bili rezultati še bolj zanimivi, smo napisali dodatno funkcijo \textit{nakljucno}, ki naključno izbere eno od križanj. 
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{nakljucno}
+\end{figure*}
+
+\newpage
 \subsection{Mutacije}
 \
 \\
@@ -205,7 +217,7 @@ S križanji smo dobili otroke, ki so neke nove poti ustvarjene iz dveh staršev.
 \centering
 \includegraphics[width=1\textwidth]{mutacija}
 \end{figure*}
-\newpage
+
 Ker pa lahko potomce dobivamo na več načinov, se pravi z različnimi križanji smo za tvorbo potomcev napisali posebno funkcijo, ki sprejme več parametrov, med njimi tudi verjetnost mutacije in način križanja. 
 
 \begin{figure*}[ht]
@@ -225,9 +237,80 @@ Po pridobitvi vseh potrebnih podatkov, lahko na tej točki poženemo naš genets
 \includegraphics[width=1\textwidth]{gatsp}
 \end{figure*}
 \newpage
+
+\subsection{Primeri in spreminjanje parametrov}
+\
+\\
+\\
+Za boljšo predstavo o delovanju našega algoritma smo na internetu poiskali nekaj že rešenih primerov in jih preizkusili tudi na našem genetskem algoritmu ter natu rezultate med sabo primerjali. Pri tem smo si za boljšo predstavo risali grafe s funkcijo \textit{narisi}  ter \textit{gaTspGraf}. 
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{narisi}
+\end{figure*}
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{gatspgraf}
+\end{figure*}
+
+Pri naših primerjavah nas je zanimala povprečna dolžina najkrajše poti, prav tako pa nam pomemben podatek predstavla tudi najkrajša pot v vseh ponovitvah. Funkcija \textit{povprecje} nam je pri danih ponovitvah genetskega algoritma izračunala povprečno dolžino njakrajše poti, ter hkrati tudi vrnila najkrajšo pot in njeno dolžino.
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=1\textwidth]{povprecje}
+\end{figure*}
+\newpage
+
 \section{Zaključek}
 
+V naši analizi smo se osredotočili na tri primere, katerih podatke in približkih rešitve smo dobili na internetu. Nato smo rešitve za dane probleme, dobljene z našim genetskim algoritmom primerjali s tistimi z interneta. Omejili smo se na tri primere in sicer ulysses22, berlin52 in kroal100. Pri primeru berlin52 smo naredili veliko primerjav, da smo dobili občutek kateri parametri res vplivajo na kvaliteto rešitve. To smo potem primerjali in potrdili še na drugih dveh primerih. 
+\\
+\\
+Tekom analize smo spreminjali sledeče parametre:
+\begin{itemize}
+\item križanje (CX, PMX in OX)
+\item velikost populacije (20, 100)
+\item število generacij (100, 1000)
+\item verjetnost mutacije (0\%, 0.5\% in 4\%)
 
+ \end{itemize}
+Ohranjali pa smo število ponovitev 20 ter število kromosomov v turnirju nastavili na 5.
+\\
+\\
+Pri primeru kroa100 je bila najbolj opazna sprememba ob večanju velikosti populacije. Dolžina najkrajše poti se je dokaj hitro bližala optimumu, kljub temu da so bile začetne vrednosti več kot dvakrat večje od optimalne vrednosti. 
+Prav tako je bilo možno opaziti veliko spremembo ob povečanju števila generacij iz 100 na 1000, saj se je ob tem najkrajša pot dvakrat podaljšala.
+\\
+\\
+Prav tako smo tudi pri primeru ulysses22 zasledili podobno gibanje rešitev, le da je bila tu konvergenca k optimumu precej hitrejša, saj sprememba števila generacij ne poveča vrednosti v tolikšni meri kot prej. Oba primera smo tu preizkušali le na urejenem križanju, med tem ko smo pri primeru berlin52 preizkusili čisto vse kombinacije. 
+\\
+\\
+Začeli smo z cikličnim križanjem, katerega konvergenca je na začetku se pravi pri majhni populaciji, majhnem številu generacij in brez mutacije najbolj počasna od vseh treh križanj. Vrednosti naše rešitve so tudi trikratnik optimalne. Ko smo povečali velikost populacije se je rešitev rahlo izboljšala, vendar še vedno ne v meri, ki bi si jo želeli. Prav tako če smo povečali le število generacij. Ob povečanju obeh parametrov pa je bil približek rešitve že soliden. 
+Nato smo povečali verjetnost mutacije iz 0 na 0.5 procenta in približek se je zelo izboljšal. Če smo ob tem še povečali populacijo in število generacij je bila vrednost rešitve najboljša do sedaj. 
+Ko pa smo verjetnost mutacije povečali na 4 procente, je začela konvergenca padati. Ob povečanju števila generacij je bila ta že zelo počasna. 
+S tem smo prišli do dejstva, da previsoka verjetnost mutacije negativno vpliva na rezultate. 
+\\
+\\
+Pri delno mapiranem križanju je začetna vrednost malenkost boljša od tiste pri cikličnem križanju. Povečanje populacije v tem primeru porodi bistveno boljše rešitve kot pri enakem povečanju populacije v cikličnem križanju. 
+Opazili smo tudi, da povečanje števila generacij tu ne vpliva bistveno na izboljšanje rešitev. Pri določenih primerih lahko konvergenco celo upočasni. 
+Povečanje verjetnosti mutacije na pol procenta tudi tu bistveno izboljša rezultat. V kombinaciji z veliko populacijo je približek poti vedno bližje pravemu. 
+Iz primerov vidimo, da večanje števila generacij najmanj pripomore k izboljšavi rešitve. 
+Pri visoki verjetnosti mutacije vsi rezultati niso tako dobri, kar nam pove kako pomemben je ta dejavnik. Visoka verjetnost bolj negativno vpliva na PMX kot na CX vendar razlike niso velike. 
+\\
+\\
+Najboljši začetni približek nam da urejeno križanje. Pri tem povečanje populacije izmerno vpliva na rezultat, saj rešitev postane dvakrat boljša. 
+Med tem ko povečanje števila generacij spet pokvari rezultat. Z malo večjo verjetnostjo mutacije se rešitev približuje optimalni. Vendar pa pri visoki mutaciji (4\%) OX konvergira najpočasneje od vseh treh križanj. 
+\\
+\\
+Opazimo, da se z večanjem velikosti populacije, pa tudi števila generacij rešitve izboljšujejo. Seveda pa ne smemo zanemariti dejstva, da z večanjem teh parametrov povečujemo tudi čas, ki ga algoritem potrebuje za izračun rešitve.  Glede na informacije o genetskih algoritmih smo zasledili, da naj bi se verjetnost mutacije gibala od 0.5 do 2 procenta. Verjetnost mutacije pri vrednosti 0.5\% nam v analizi dejansko da najbolše rešitve. Vidimo tudi, da je verjetnost mutacije (za vse tri metode) pri vrednosti 0.005 precej blizu optimalni, saj se že pri 0.01 in 0.02 dolžine poti (npr. pri OX) zopet večajo proti 12000. Se pravi lahko pri vseh primerih zasledimo, da preveliko povečanje verjetnosti mutacije negativno vpliva na približek rešitve. Mutacija, ki je seveda zelo pomembna za ohranjanje raznolikosti rešitev, pa ne sme zajeti prevelikega deleža populacije, saj se s tem izgubljajo naše že zgrajene rešitve. 
+\\
+\\
+Če primerjamo izboljševanje rezultatov pri večanju populacije ali pa števila generacij opazimo, da na primer (pri OX) pri številu generacij 100 in velikosti populacije 50 dobimo rezultate okoli 12000, če desetkrat povečamo število generacij so najkrajše poti okoli 10000, pri desetkratni povečavi populacije pa okoli 8600. Torej je povečevanje populacije večjega pomena za konvergenco k optimalni rešitvi, kot povečava števila generacij.
+\\
+\\
+ V splošnem je najhitrejša metoda z uporabo urejenega križanja ali OX. Na začetku so njeni rezultati sicer dokaj slabi, a jih lahko zelo hitro izboljšamo s povečanjem populacije in s tem povečamo hitrost konvergence. 
+
+\newpage
 \begin{thebibliography}{99}
 
 
@@ -237,11 +320,13 @@ Po pridobitvi vseh potrebnih podatkov, lahko na tej točki poženemo naš genets
 \bibitem{splet}
 N.~Kumar, Karambir in R.~Kumar, \emph{A Comarative Analysis of PMX, CX and OX Crossover operators for solving Travelling Salesman Problem}, [ogled 13.~12.~2018], dostopno na \url{http://www.mnkjournals.com/ijlrst_files/Download/Vol%201%20Issue%202/303-%20Naveen.pdf}.
 
-\end{thebibliography}
+
+\bibitem{primeri}
+ \emph{ The TSPLIB Symmetric Traveling Salesman Problem Instances}, [ogled 28.~12.~2018], dostopno na \url{http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/index.html?fbclid=IwAR2VkUJ80JoqQbLKAyGlriphhbhYjwmE7f_gH1P5K6a0asRisrHoW_zKr48}
 
 
 
 
-
+\end{thebibliography}{99}
 
 \end{document}
