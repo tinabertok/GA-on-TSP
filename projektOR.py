@@ -449,6 +449,13 @@ def main():
 #Opazimo torej, da prevelik delež mutirane populacije slabša rešitev problema. To smo lahko videli pri uporabi katerekoli metode križanja.
 #pri primerjavi metod križanja ugotovimo, da je v splošnem najhitrejša metoda OX. Pri mutacijski verjetnosti 0 namreč na začetku dosega zelo slabe rezultate, ki so močno oddaljeni od optimalne rešitve,
 #a le te z večanjem populacije lahko zelo hitro znižamo, torej je konvergenca vseeno precej hitra.
+#Pri velikosti populacije 500 se pri metodi OX na primer povprečna dolžina poti (pri optimumu 7544 enot) giblje že tudi okoli 8300, na drugi strani
+#pa metoda PMX pri tej velikosti populacije daje rezultate okoli 15500, CX pa okoli 17800, torej precej bolj oddaljeno od optimalne rešitve.
+#Vidimo tudi, da je verjetnost mutacije (za vse tri metode) pri vrednosti 0.005 precej blizu optimalni, saj se že pri 0.01 in 0.02 dolžine poti
+#(npr. pri OX) zopet večajo proti 12000.
+#Če primerjamo izboljševanje rezultatov pri večanju populacije ali pa števila generacij opazimo, da na primer (za metodo OX) pri številu generacij 100 in
+#velikosti populacije 50 dobimo rezultate okoli 12000, če desetkrat povečamo število generacij so najkrajše poti okoli 10000, pri desetkratni povečavi populacije
+#pa okoli 8600. Torej je povečevanje populacije večjega pomena za konvergenco k optimalni rešitvi, kot povečava števila generacij.
 
 
 
