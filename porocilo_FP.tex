@@ -7,6 +7,7 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{subcaption}
 %\usepackage[demo]{graphicx}
 %\usepackage[normalem]{ulem}
 \usepackage[dvipsnames,usenames]{color}
@@ -283,8 +284,12 @@ Prav tako je bilo možno opaziti veliko spremembo ob povečanju števila generac
 \\
 \\
 Prav tako smo tudi pri primeru ulysses22 zasledili podobno gibanje rešitev, le da je bila tu konvergenca k optimumu precej hitrejša, saj sprememba števila generacij ne poveča vrednosti v tolikšni meri kot prej. Oba primera smo tu preizkušali le na urejenem križanju, med tem ko smo pri primeru berlin52 preizkusili čisto vse kombinacije. 
-\\
-\\
+
+\begin{figure*}[ht]
+\centering
+\includegraphics[width=100 mm, scale = 0.7]{optimum}
+\end{figure*}
+
 Začeli smo z cikličnim križanjem, katerega konvergenca je na začetku se pravi pri majhni populaciji, majhnem številu generacij in brez mutacije najbolj počasna od vseh treh križanj. Vrednosti naše rešitve so tudi trikratnik optimalne. Ko smo povečali velikost populacije se je rešitev rahlo izboljšala, vendar še vedno ne v meri, ki bi si jo želeli. Prav tako če smo povečali le število generacij. Ob povečanju obeh parametrov pa je bil približek rešitve že soliden. 
 Nato smo povečali verjetnost mutacije iz 0 na 0.5 procenta in približek se je zelo izboljšal. Če smo ob tem še povečali populacijo in število generacij je bila vrednost rešitve najboljša do sedaj. 
 Ko pa smo verjetnost mutacije povečali na 4 procente, je začela konvergenca padati. Ob povečanju števila generacij je bila ta že zelo počasna. 
@@ -298,6 +303,39 @@ Iz primerov vidimo, da večanje števila generacij najmanj pripomore k izboljša
 Pri visoki verjetnosti mutacije vsi rezultati niso tako dobri, kar nam pove kako pomemben je ta dejavnik. Visoka verjetnost bolj negativno vpliva na PMX kot na CX vendar razlike niso velike. 
 \\
 \\
+Spodaj lahko vidimo primer izboljšanja rešitve ob povečanju populacije pri metodi PMX, verjetnosti mutacije 0 ter 100 generacijah.
+\\
+\\
+\begin{figure}[h!]
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{primer-pop1}
+\caption{Populacija 20}
+\label{pop1}
+\end{minipage}
+\hspace*{\fill} % it's important not to leave blank lines before and after this command
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{primer-pop2}
+\caption{Populacija 100}
+\label{pop2}
+\end{minipage}
+\end{figure}
+\\
+\\
+Naslednja slika pa nam pokaže lepo primerjavo s prejšno, kako povečanje populacije na izboljšanje rešitve vpliva veliko bolj od povečanja števila generacij. Tu so enaki pogoji kot prej, le da je stalna velikost populacije 20, spreminja pa es število generacij. 
+\begin{figure}[h!]
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{primer-pop1}
+\caption{Število generacij 100}
+\label{gem1}
+\end{minipage}
+\hspace*{\fill} % it's important not to leave blank lines before and after this command
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{primer-pop-gen3}
+\caption{Število generacij 1000}
+\label{gen2}
+\end{minipage}
+\end{figure}
+\newpage
 Najboljši začetni približek nam da urejeno križanje. Pri tem povečanje populacije izmerno vpliva na rezultat, saj rešitev postane dvakrat boljša. 
 Med tem ko povečanje števila generacij spet pokvari rezultat. Z malo večjo verjetnostjo mutacije se rešitev približuje optimalni. Vendar pa pri visoki mutaciji (4\%) OX konvergira najpočasneje od vseh treh križanj. 
 \\
@@ -305,10 +343,50 @@ Med tem ko povečanje števila generacij spet pokvari rezultat. Z malo večjo ve
 Opazimo, da se z večanjem velikosti populacije, pa tudi števila generacij rešitve izboljšujejo. Seveda pa ne smemo zanemariti dejstva, da z večanjem teh parametrov povečujemo tudi čas, ki ga algoritem potrebuje za izračun rešitve.  Glede na informacije o genetskih algoritmih smo zasledili, da naj bi se verjetnost mutacije gibala od 0.5 do 2 procenta. Verjetnost mutacije pri vrednosti 0.5\% nam v analizi dejansko da najbolše rešitve. Vidimo tudi, da je verjetnost mutacije (za vse tri metode) pri vrednosti 0.005 precej blizu optimalni, saj se že pri 0.01 in 0.02 dolžine poti (npr. pri OX) zopet večajo proti 12000. Se pravi lahko pri vseh primerih zasledimo, da preveliko povečanje verjetnosti mutacije negativno vpliva na približek rešitve. Mutacija, ki je seveda zelo pomembna za ohranjanje raznolikosti rešitev, pa ne sme zajeti prevelikega deleža populacije, saj se s tem izgubljajo naše že zgrajene rešitve. 
 \\
 \\
+Spodnji dve sliki prikazujeta približek rešitve brez mutacije in pri mutaciji 0.5\%. Tu je jasno razvidno, kako pravilna vrednost verjetnosti mutacije vpliva na boljšo konvergenco. 
+\\
+\\
+\begin{figure}[h!]
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{primer-mut1}
+\caption{Verj. mutacije 0\%}
+\label{mut1}
+\end{minipage}
+\hspace*{\fill} % it's important not to leave blank lines before and after this command
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{primer-mut2}
+\caption{Verj. mutacije 0.5\%}
+\label{mut2}
+\end{minipage}
+\end{figure}
+\newpage
 Če primerjamo izboljševanje rezultatov pri večanju populacije ali pa števila generacij opazimo, da na primer (pri OX) pri številu generacij 100 in velikosti populacije 50 dobimo rezultate okoli 12000, če desetkrat povečamo število generacij so najkrajše poti okoli 10000, pri desetkratni povečavi populacije pa okoli 8600. Torej je povečevanje populacije večjega pomena za konvergenco k optimalni rešitvi, kot povečava števila generacij.
 \\
 \\
  V splošnem je najhitrejša metoda z uporabo urejenega križanja ali OX. Na začetku so njeni rezultati sicer dokaj slabi, a jih lahko zelo hitro izboljšamo s povečanjem populacije in s tem povečamo hitrost konvergence. 
+Zgoraj lahko vidimo primerjavo vseh treh križanj, pri velikosti populacije 100, 1000 generacijah in verjetnosti mutacije 0.5\%.
+
+\begin{figure}[h!]
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{CX-primer}
+\caption{CX}
+\label{CX}
+\end{minipage}
+\hspace*{\fill} % it's important not to leave blank lines before and after this command
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{PMX-primer}
+\caption{PMX}
+\label{PMX}
+\end{minipage}
+\hspace*{\fill} % it's important not to leave blank lines before and after this command
+\begin{minipage}[t]{0.48\textwidth}
+\includegraphics[width=\linewidth,keepaspectratio=true]{OX-primer}
+\caption{OX}
+\label{OX}
+\end{minipage}
+\end{figure}
+
+
 
 \newpage
 \begin{thebibliography}{99}
