@@ -129,7 +129,7 @@ Pri programiranju in pisanju algoritma smo se odločili za programski jezik Pyth
 \
 \\
 \\
-Že dobro poznan problem potujočega , smo se odločili predstaviti z grafom v obliki $n \times n$ matrike cen povezav. Graf smo generirali tako, da smo elemente matrike, ki predstavljajo celoštevilske cene povezav, izbrali naključno. To je prikazano v spodnji funkciji \textit{utezi(n, maxCena)}.
+Že dobro poznan problem potujočega potnika smo se odločili predstaviti z grafom v obliki $n \times n$ matrike cen povezav. Graf smo generirali tako, da smo elemente matrike, ki predstavljajo celoštevilske cene povezav, izbrali naključno. To je prikazano v spodnji funkciji \textit{utezi(n, maxCena)}.
 
 \begin{figure*}[ht]
 \centering
@@ -190,7 +190,7 @@ Drugi način križanja je delno mapirano križanje ali PMX, v katerem starša sp
 \
 \\
 \\
-Zadnji način križanja, ki smo ga uporabili je ciklično križanje ali CX. Tu naša funkcija sprejme dva starša, iz katerih naredi slovar. Pri tem prvi starš predstavlja ključ, drugi pa vrednost. Najprej poiščemo vse ciklje med staršema in jih shranimo v množico A. Prvega otroka tvorimo tako, da mu po vrsti dodamo vsak sodi cikel iz prvega stašra in vsak lihi cikel iz drugega starša. Pri drugem otroku ravnamo ravno obratno.  
+Zadnji način križanja, ki smo ga uporabili je ciklično križanje ali CX. Tu naša funkcija sprejme dva starša, iz katerih naredi slovar. Pri tem prvi starš predstavlja ključ, drugi pa vrednost. Najprej poiščemo vse ciklje med staršema in jih shranimo v množico A. Prvega otroka tvorimo tako, da mu po vrsti dodamo vsak sodi cikel iz prvega starša in vsak lihi cikel iz drugega starša. Pri drugem otroku ravnamo ravno obratno.  
 
 \begin{figure*}[ht]
 \centering
@@ -243,7 +243,7 @@ Po pridobitvi vseh potrebnih podatkov, lahko na tej točki poženemo naš genets
 \
 \\
 \\
-Za boljšo predstavo o delovanju našega algoritma smo na internetu poiskali nekaj že rešenih primerov in jih preizkusili tudi na našem genetskem algoritmu ter natu rezultate med sabo primerjali. Pri tem smo si za boljšo predstavo risali grafe s funkcijo \textit{narisi}  ter \textit{gaTspGraf}. 
+Za boljšo predstavo o delovanju našega algoritma smo na internetu poiskali nekaj že rešenih primerov in jih preizkusili tudi na našem genetskem algoritmu ter nato rezultate med sabo primerjali. Pri tem smo si za boljšo predstavo risali grafe s funkcijo \textit{narisi}  ter \textit{gaTspGraf}. 
 
 \begin{figure*}[ht]
 \centering
@@ -255,7 +255,7 @@ Za boljšo predstavo o delovanju našega algoritma smo na internetu poiskali nek
 \includegraphics[width=1\textwidth]{gatspgraf}
 \end{figure*}
 
-Pri naših primerjavah nas je zanimala povprečna dolžina najkrajše poti, prav tako pa nam pomemben podatek predstavla tudi najkrajša pot v vseh ponovitvah. Funkcija \textit{povprecje} nam je pri danih ponovitvah genetskega algoritma izračunala povprečno dolžino njakrajše poti, ter hkrati tudi vrnila najkrajšo pot in njeno dolžino.
+Pri naših primerjavah nas je zanimala povprečna dolžina najkrajše poti, prav tako pa nam pomemben podatek predstavlja tudi najkrajša pot v vseh ponovitvah. Funkcija \textit{povprecje} nam je pri danih ponovitvah genetskega algoritma izračunala povprečno dolžino najkrajše poti, ter hkrati tudi vrnila najkrajšo pot in njeno dolžino.
 
 \begin{figure*}[ht]
 \centering
@@ -265,7 +265,7 @@ Pri naših primerjavah nas je zanimala povprečna dolžina najkrajše poti, prav
 
 \section{Zaključek}
 
-V naši analizi smo se osredotočili na tri primere, katerih podatke in približkih rešitve smo dobili na internetu. Nato smo rešitve za dane probleme, dobljene z našim genetskim algoritmom primerjali s tistimi z interneta. Omejili smo se na tri primere in sicer ulysses22, berlin52 in kroal100. Pri primeru berlin52 smo naredili veliko primerjav, da smo dobili občutek kateri parametri res vplivajo na kvaliteto rešitve. To smo potem primerjali in potrdili še na drugih dveh primerih. 
+V naši analizi smo se osredotočili na tri primere, katerih podatke in približke rešitev smo dobili na internetu. Nato smo rešitve za dane probleme, dobljene z našim genetskim algoritmom primerjali s tistimi z interneta. Omejili smo se na tri primere in sicer ulysses22, berlin52 in kroal100. Pri primeru berlin52 smo naredili veliko primerjav, da smo dobili občutek kateri parametri res vplivajo na kvaliteto rešitve. To smo potem primerjali in potrdili še na drugih dveh primerih. 
 \\
 \\
 Tekom analize smo spreminjali sledeče parametre:
@@ -292,7 +292,7 @@ Prav tako smo tudi pri primeru ulysses22 zasledili podobno gibanje rešitev, le 
 
 Začeli smo z cikličnim križanjem, katerega konvergenca je na začetku se pravi pri majhni populaciji, majhnem številu generacij in brez mutacije najbolj počasna od vseh treh križanj. Vrednosti naše rešitve so tudi trikratnik optimalne. Ko smo povečali velikost populacije se je rešitev rahlo izboljšala, vendar še vedno ne v meri, ki bi si jo želeli. Prav tako če smo povečali le število generacij. Ob povečanju obeh parametrov pa je bil približek rešitve že soliden. 
 Nato smo povečali verjetnost mutacije iz 0 na 0.5 procenta in približek se je zelo izboljšal. Če smo ob tem še povečali populacijo in število generacij je bila vrednost rešitve najboljša do sedaj. 
-Ko pa smo verjetnost mutacije povečali na 4 procente, je začela konvergenca padati. Ob povečanju števila generacij je bila ta že zelo počasna. 
+Ko pa smo verjetnost mutacije povečali na 4 procente, so se rezultati začeli slabšati. Tudi ob povečanju števila generacij je dobljena dolžina poti zelo daleč od optimalne. 
 S tem smo prišli do dejstva, da previsoka verjetnost mutacije negativno vpliva na rezultate. 
 \\
 \\
@@ -300,7 +300,7 @@ Pri delno mapiranem križanju je začetna vrednost malenkost boljša od tiste pr
 Opazili smo tudi, da povečanje števila generacij tu ne vpliva bistveno na izboljšanje rešitev. Pri določenih primerih lahko konvergenco celo upočasni. 
 Povečanje verjetnosti mutacije na pol procenta tudi tu bistveno izboljša rezultat. V kombinaciji z veliko populacijo je približek poti vedno bližje pravemu. 
 Iz primerov vidimo, da večanje števila generacij najmanj pripomore k izboljšavi rešitve. 
-Pri visoki verjetnosti mutacije vsi rezultati niso tako dobri, kar nam pove kako pomemben je ta dejavnik. Visoka verjetnost bolj negativno vpliva na PMX kot na CX vendar razlike niso velike. 
+Pri visoki verjetnosti mutacije vsi rezultati niso tako dobri, kar nam pove kako pomemben je ta dejavnik. Visoka verjetnost bolj negativno vpliva na PMX kot na CX, vendar razlike niso velike. 
 \\
 \\
 Spodaj lahko vidimo primer izboljšanja rešitve ob povečanju populacije pri metodi PMX, verjetnosti mutacije 0 ter 100 generacijah.
@@ -321,7 +321,7 @@ Spodaj lahko vidimo primer izboljšanja rešitve ob povečanju populacije pri me
 \end{figure}
 \\
 \\
-Naslednja slika pa nam pokaže lepo primerjavo s prejšno, kako povečanje populacije na izboljšanje rešitve vpliva veliko bolj od povečanja števila generacij. Tu so enaki pogoji kot prej, le da je stalna velikost populacije 20, spreminja pa es število generacij. 
+Naslednja slika pa nam pokaže lepo primerjavo s prejšnjo, kako povečanje populacije veliko bolj vpliva na izboljšanje rešitve, kakor povečanje števila generacij. Tu so enaki pogoji kot prej, le da je stalna velikost populacije 20, spreminja pa se sedaj število generacij. 
 \begin{figure}[h!]
 \begin{minipage}[t]{0.48\textwidth}
 \includegraphics[width=\linewidth,keepaspectratio=true]{primer-pop1}
@@ -336,11 +336,10 @@ Naslednja slika pa nam pokaže lepo primerjavo s prejšno, kako povečanje popul
 \end{minipage}
 \end{figure}
 \newpage
-Najboljši začetni približek nam da urejeno križanje. Pri tem povečanje populacije izmerno vpliva na rezultat, saj rešitev postane dvakrat boljša. 
-Med tem ko povečanje števila generacij spet pokvari rezultat. Z malo večjo verjetnostjo mutacije se rešitev približuje optimalni. Vendar pa pri visoki mutaciji (4\%) OX konvergira najpočasneje od vseh treh križanj. 
+Najboljši začetni približek nam da urejeno križanje. Pri tem povečanje populacije znatno vpliva na rezultat, saj rešitev postane skoraj dvakrat boljša, medtem ko povečanje števila generacij spet pokvari rezultat. Z malo večjo verjetnostjo mutacije se rešitev najbolj približa optimalni od vseh obravnavanih primerov, vendar pa visoka mutacija (4\%) na OX vpliva najslabše od vseh treh križanj. 
 \\
 \\
-Opazimo, da se z večanjem velikosti populacije, pa tudi števila generacij rešitve izboljšujejo. Seveda pa ne smemo zanemariti dejstva, da z večanjem teh parametrov povečujemo tudi čas, ki ga algoritem potrebuje za izračun rešitve.  Glede na informacije o genetskih algoritmih smo zasledili, da naj bi se verjetnost mutacije gibala od 0.5 do 2 procenta. Verjetnost mutacije pri vrednosti 0.5\% nam v analizi dejansko da najbolše rešitve. Vidimo tudi, da je verjetnost mutacije (za vse tri metode) pri vrednosti 0.005 precej blizu optimalni, saj se že pri 0.01 in 0.02 dolžine poti (npr. pri OX) zopet večajo proti 12000. Se pravi lahko pri vseh primerih zasledimo, da preveliko povečanje verjetnosti mutacije negativno vpliva na približek rešitve. Mutacija, ki je seveda zelo pomembna za ohranjanje raznolikosti rešitev, pa ne sme zajeti prevelikega deleža populacije, saj se s tem izgubljajo naše že zgrajene rešitve. 
+Opazimo, da se z večanjem velikosti populacije, deloma pa tudi števila generacij, rešitve izboljšujejo. Seveda pa ne smemo zanemariti dejstva, da z večanjem teh parametrov povečujemo tudi čas, ki ga algoritem potrebuje za izračun rešitve.  Glede na informacije o genetskih algoritmih smo zasledili, da naj bi se verjetnost mutacije gibala od 0.5 do 2 procenta. Verjetnost mutacije pri vrednosti 0.5\% nam v analizi dejansko da najbolše rešitve. Vidimo tudi, da je verjetnost mutacije (za vse tri metode) pri vrednosti 0.005 precej blizu optimalni, saj se že pri 0.01 in 0.02 dolžine poti (npr. pri OX) zopet večajo proti 12000. Se pravi lahko pri vseh primerih zasledimo, da preveliko povečanje verjetnosti mutacije negativno vpliva na približek rešitve. Mutacija, ki je seveda zelo pomembna za ohranjanje raznolikosti rešitev, torej ne sme zajeti prevelikega deleža populacije, saj se s tem izgubljajo naše že zgrajene rešitve. 
 \\
 \\
 Spodnji dve sliki prikazujeta približek rešitve brez mutacije in pri mutaciji 0.5\%. Tu je jasno razvidno, kako pravilna vrednost verjetnosti mutacije vpliva na boljšo konvergenco. 
@@ -363,7 +362,7 @@ Spodnji dve sliki prikazujeta približek rešitve brez mutacije in pri mutaciji 
 Če primerjamo izboljševanje rezultatov pri večanju populacije ali pa števila generacij opazimo, da na primer (pri OX) pri številu generacij 100 in velikosti populacije 50 dobimo rezultate okoli 12000, če desetkrat povečamo število generacij so najkrajše poti okoli 10000, pri desetkratni povečavi populacije pa okoli 8600. Torej je povečevanje populacije večjega pomena za konvergenco k optimalni rešitvi, kot povečava števila generacij.
 \\
 \\
- V splošnem je najhitrejša metoda z uporabo urejenega križanja ali OX. Na začetku so njeni rezultati sicer dokaj slabi, a jih lahko zelo hitro izboljšamo s povečanjem populacije in s tem povečamo hitrost konvergence. 
+ V splošnem je najhitrejša metoda z uporabo urejenega križanja ali OX. Na začetku so njeni rezultati sicer dokaj slabi, a jih lahko zelo hitro izboljšamo s povečanjem populacije in tako opazimo visoko hitrost konvergence. 
 Zgoraj lahko vidimo primerjavo vseh treh križanj, pri velikosti populacije 100, 1000 generacijah in verjetnosti mutacije 0.5\%.
 
 \begin{figure}[h!]
