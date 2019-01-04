@@ -116,7 +116,7 @@ V genetskem algoritmu se uporabi množica kandidatov za rešitev, ki jih nato ra
 ima določene lastnosti, katere lahko spremenimo oziroma lahko mutirajo. Evolucija rešitev se ponavadi začne na naključni izbiri kandidatov, katere potem s pomočjo iteracije razvijamo. Na vsakem iterativnem koraku se potem oceni primernost novih kandidatov za optimizacijski problem. Najboljše kandidate potem uporabimo za naslednji korak iteracije. Algoritem se zaključi, ko je izpolnjen zaustavitveni kriterij. Ena možnost je, da algoritem ustavimo po tem, ko preteče določeno število generacij.
 \\
 \\
-\textit{Problem trgovskega potnika} oz. \textit{traveling salesman problem (TSP)} je NP-težek problem v kombinatorični optimizaciji, pomemben pri operacijskih raziskavah, matematični optimizaciji in teoretičnemu računalništvu. Trgovski potnik mora obiskati določeno množico mest tako, da bo pri tem prehodil čim krajšo pot in se vrniti v izhodišče.
+\textit{Problem trgovskega potnika} oz. \textit{travelling salesman problem (TSP)} je NP-težek problem v kombinatorični optimizaciji, pomemben pri operacijskih raziskavah, matematični optimizaciji in teoretičnemu računalništvu. Trgovski potnik mora obiskati določeno množico mest tako, da bo pri tem prehodil čim krajšo pot in se vrniti v izhodišče.
 \\
 \\
 Pri programiranju in pisanju algoritma smo se odločili za programski jezik Python, saj imamo v njem največ znanja. Pri projektu pa smo spoznali še knjižnico \textit{matplotlib} za delo z grafi. 
@@ -129,7 +129,7 @@ Pri programiranju in pisanju algoritma smo se odločili za programski jezik Pyth
 \
 \\
 \\
-Že dobro poznan problem potujočega potnika smo se odločili predstaviti z grafom v obliki $n \times n$ matrike cen povezav. Graf smo generirali tako, da smo elemente matrike, ki predstavljajo celoštevilske cene povezav, izbrali naključno. To je prikazano v spodnji funkciji \textit{utezi(n, maxCena)}.
+Že dobro poznan problem potujočega potnika smo se odločili predstaviti z grafom v obliki $n \times n$ matrike cen povezav. Graf smo generirali tako, da smo elemente matrike, ki predstavljajo celoštevilske cene povezav, izbrali naključno. To je prikazano v spodnji funkciji \textit{utezi}.
 
 \begin{figure*}[ht]
 \centering
@@ -190,7 +190,7 @@ Drugi način križanja je delno mapirano križanje ali PMX, v katerem starša sp
 \
 \\
 \\
-Zadnji način križanja, ki smo ga uporabili je ciklično križanje ali CX. Tu naša funkcija sprejme dva starša, iz katerih naredi slovar. Pri tem prvi starš predstavlja ključ, drugi pa vrednost. Najprej poiščemo vse ciklje med staršema in jih shranimo v množico A. Prvega otroka tvorimo tako, da mu po vrsti dodamo vsak sodi cikel iz prvega starša in vsak lihi cikel iz drugega starša. Pri drugem otroku ravnamo ravno obratno.  
+Zadnji način križanja, ki smo ga uporabili je ciklično križanje ali CX. Tu naša funkcija sprejme dva starša, iz katerih naredi slovar. Pri tem prvi starš predstavlja ključ, drugi pa vrednost. Najprej poiščemo vse cikle med staršema in jih shranimo v množico A. Prvega otroka tvorimo tako, da mu po vrsti dodamo vsak sodi cikel iz prvega starša in vsak lihi cikel iz drugega starša. Pri drugem otroku ravnamo ravno obratno.  
 
 \begin{figure*}[ht]
 \centering
@@ -321,7 +321,7 @@ Spodaj lahko vidimo primer izboljšanja rešitve ob povečanju populacije pri me
 \end{figure}
 \\
 \\
-Naslednja slika pa nam pokaže lepo primerjavo s prejšnjo, kako povečanje populacije veliko bolj vpliva na izboljšanje rešitve, kakor povečanje števila generacij. Tu so enaki pogoji kot prej, le da je stalna velikost populacije 20, spreminja pa se sedaj število generacij. 
+Naslednja slika pa nam pokaže lepo primerjavo s prejšnjo, kako povečanje populacije veliko bolj vpliva na izboljšanje rešitve, kakor povečanje števila generacij. Tu so enaki pogoji kot prej, le da je stalna velikost populacije 20, spreminja pa se število generacij. 
 \begin{figure}[h!]
 \begin{minipage}[t]{0.48\textwidth}
 \includegraphics[width=\linewidth,keepaspectratio=true]{primer-pop1}
@@ -386,9 +386,11 @@ Zgoraj lahko vidimo primerjavo vseh treh križanj, pri velikosti populacije 100,
 \end{figure}
 
 
+Na koncu je potrebno še omeniti, da se ob večanju problema (števila mest) rešitve vedno bolj oddaljujejo od optimuma. Pri problemu ulysses22, ki je še dokaj majhen, se naša rešitev zelo približa optimalni. Na drugi strani pa imamo problem kroa100, ki je približno 4 krat večji. Tu se naše rešitve že krepko razlikujejo od optimuma. 
+
 
 \newpage
-\begin{thebibliography}{99}
+\begin{thebibliography}{}
 
 
 \bibitem{wiki}
@@ -404,6 +406,6 @@ N.~Kumar, Karambir in R.~Kumar, \emph{A Comarative Analysis of PMX, CX and OX Cr
 
 
 
-\end{thebibliography}{99}
+\end{thebibliography}{}
 
 \end{document}
