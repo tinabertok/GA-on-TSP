@@ -12,7 +12,6 @@ plt.rcParams['axes.prop_cycle'] = cycler(color='k')
 # seznam s koordinatami mest.
 
 # readFile("berlin52.txt")
-
 def preberi(mapa):
     with open(mapa) as lokacije:
         koordinate = []
@@ -35,7 +34,6 @@ def preberi(mapa):
     return(koordinate) 
 
 # Mnozica mesto je seznam koordinat mest - (x, y). Fja vrne matriko evklidskih razdalj med mesti.
-
 def mesta(mesta):
     n = len(mesta)
     utezi = np.zeros((n, n))
@@ -48,9 +46,7 @@ def mesta(mesta):
     return(utezi)
     
 # Izracuna razdalje za GEO lokacije. Formula dobljena s strani: https://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/TSPFAQ.html
-
-# podatki pri probemu ulysses22 so podani v GEO lokacijah
-    
+# Podatki pri probemu ulysses22 so podani v GEO lokacijah. 
 def mestaGeo(mesta):
     n = len(mesta)
     utezi = np.zeros((n, n))
@@ -75,11 +71,7 @@ def mestaGeo(mesta):
             
     return(utezi)
     
-# Vrne najkrajso pot podano v .txt datoteki dobljeni iz TSPLIB.
-# ulysses22 dolzina 7013
-# kroa100 dolzina = 21285.44318157108
-# berlin52 dolzina = 7544.365901904087
-    
+# Vrne najkrajso pot podano v .txt datoteki dobljeni iz TSPLIB.   
 def najkrajsaConcord(najkrajsaPot):
     with open(najkrajsaPot) as mesta:
         koordinate = []
@@ -102,14 +94,12 @@ def najkrajsaConcord(najkrajsaPot):
     return(koordinate) 
 
 # Ustvarimo matriko cen povezav/utezi, kjer za vsak par vozlisc nakljucno izberemo celostevilsko ceno povezave med 0 in maxCena.
-
 def utezi(n, maxCena):
     utezi = np.random.randint(0, maxCena, size=(n, n))
     np.fill_diagonal(utezi, 0)
     return(utezi)
 
 # Izracunamo dolzino dane poti iz cen povezav v matriki utezi.
-
 def dolzinaPoti(pot, utezi):
     dolzina = 0
     for i in range(len(pot) - 1):
@@ -118,8 +108,7 @@ def dolzinaPoti(pot, utezi):
     return(dolzina)
 
 # Nakljucno ustvari zacetno populacijo velikosti popVelikost. Posamezen predstavnik populacije je neka pot med vsemi vozlisci.
-# V slovarju imamo vsako pot podano v paru z njeno dolzino. popVelikost izberemo sami.
-
+# V slovarju imamo vsako pot podano v paru z njeno dolzino.
 def populacija(popVelikost, utezi):
     pot = list(range(1, len(utezi) + 1))
     poti = {}
@@ -131,10 +120,8 @@ def populacija(popVelikost, utezi):
         
     return(poti)
 
-# Selekcija s turnirjem. Druga opcija bi bila proporcionalna selekcija.
 # Iz populacije izberemo nakljucno k kromosomov/elementov/poti. Funkcija vrne par zmagovalec - pot z najkrajso dolzino - in njeno dolzino.
 # Stevilo kromosomov(poti) v turnirju - k -  izberemo sami. Potrebno pazljivo izbrati k. Vecji kot je, hitrejsa je konvergenca (to ni nujno dobro).
-
 def turnir(populacija, kTurnir):
     vozlisca = list(range(1, len(populacija) + 1))
     random.shuffle(vozlisca)
@@ -149,20 +136,12 @@ def turnir(populacija, kTurnir):
             
     return(pot)
 
-# Ordered crossover(OX). Ustvarimo dva potomoca iz dveh starsev z "ordered crossover" metodo križanja.
-# a <= b <= len(pot). Stars je neka pot, ki je zmagala na turnirju.
-#
-# Vsak stars predstavlja neko zaporedje vseh vozlisc. Oba starsa razdelimo na 3 podazporedja: 1. podzaporedje gre od zacetka do vkljucno
-# vozlisca na a-tem mestu, 2. od tu naprej do vkljucno b-tega mesta, 3. pa od b+1 mesta naprej do konca. Prvega potomca tvorimo tako, da kopiramo
-# 2. podzaporedje prvega starsa na enako pozicijo. Od konca tega podazporedja, torej od b+1 mesta, naprej nadaljujemo z vozlisci drugega starsa,
-# v vrstnem redu 3. podzaporedje, 1. podazporedje, 2. podzaporedje. Seveda izkljucimo tista vozlisca, ki so ze vsebovana. Ko pridemo do konca,
-# nadaljujemo se od zacetka do a-tega mesta. Enako za drugega potomca, le da vlogi starsev zamenjamo.
-
+# Ordered crossover
 def OX(stars1, stars2):
     dolzina = len(stars1)
     
     rez_a = random.randint(1,len(stars1))
-    rez_b = random.randint(rez_a,len(stars1)) #funkcija vzame rez_a in rez_b v odnosu rez_a <= rez_b
+    rez_b = random.randint(rez_a,len(stars1))
     
     ostanek1 = stars2[rez_b:] + stars2[:rez_b]
     for vozl in stars1[rez_a:rez_b]:
@@ -176,19 +155,11 @@ def OX(stars1, stars2):
     
     return(otrok1, otrok2)
 
-
-
-#drugi crossover postopek, vhodna podatka sta dva starša
-#prvemu otroku prepišemo vrednosti prvega starša med obema rezoma
-#vsaka vrednost i iz izreza drugega starša, ki ni v izrezu prvega, dobi svoj istoležeči par v prvem staršu. Če je ta par že vsebovan v izrezu drugega,
-#tej vrednosti zopet poiščemo par iz prvega starša in to počnemo dokler dobljeni istoležeči par v drugem staršu ne leži izven izreza. 
-#Takrat na njegovo mesto (v drugem staršu) zapišemo vrednost i.
-#Na koncu postopka vsa prazna mesta v otroku zapolnimo z istoležečimi vrednostmi iz drugega starša.
-
+# Partial mapped crossover
 def PMX(stars1, stars2):
 	l=len(stars1)
 	rez_c = random.randint(1,len(stars1))
-	rez_d = random.randint(rez_c,len(stars1)) #funkcija vzame rez_c in rez_d v odnosu rez_c <= rez_d
+	rez_d = random.randint(rez_c,len(stars1))
     
 	izrez1 = stars1[rez_c:rez_d]
 	izrez2 = stars2[rez_c:rez_d]
@@ -225,13 +196,7 @@ def PMX(stars1, stars2):
 	
 	return(otrok1, otrok2)
 
-#algoritem deluje tudi za robne vrednosti, torej ko je rez_c=0, rez_d=ln oziroma, kadar sta oba reza enaka. 
-#problem se pojavi pri definiranju otroka, kot seznam ničel, v primeru da je kateri od elementov v starših ničeln. Ali nas to moti?
-
-#postopek cycle crossover sprejme za vhodne podatke dva starša, ki ju poveže v slovar, starš1 predstavlja ključe, starš2 pa vrednosti.
-#najprej poiščemo vse cikle med staršema in ju shranimo v množico A. Nato otroka ustvarimo tako, da na primer prvemu otroku dodamo po vrsti 
-#vsak sodi cikel iz prvega starša in vsak lihi iz drugega, pri drugem otroku pa delamo ravno obratno.
-
+# Cycle crossover
 def CX(stars1, stars2):
 	slovar={key:value for key, value in zip(list(stars1), list(stars2))}
 	l=len(stars1)
@@ -261,8 +226,6 @@ def CX(stars1, stars2):
 	return(otrok1, otrok2)
 
 # Vsako vozlisce z verjetnostjo verjMutacije mutiramo - zamenjamo polozaj mutiranega vozlisca in nakljucnega vozlisca na poti.
-# S tem ohranjamo raznolikost populacije in se poskusamo izogniti prehitri konvergenci, ki nas lahko vodi blizu lokalnega, ne pa globalnega optimuma.
-
 def mutacija(otrok, verjMutacije):
     for i in range(len(otrok)):
         if random.random() <= verjMutacije:
@@ -272,7 +235,6 @@ def mutacija(otrok, verjMutacije):
 
 # Ustvarimo naslednjo generacijo tako, da izbiramo po 2 starsa iz populacije, ki ju nato krizamo, da dobimo 2 potomca.
 # Oba potomca nato mutiramo. Ponavljamo dokler ni mnozica potomcev enako velika kot populacija.
-
 def potomci(utezi, populacija, verjMutacije, kTurnir, crossover):
     potomci = {}
     for i in range(int(len(populacija)/2)):
@@ -345,7 +307,6 @@ def gaTspGraf(stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover, 
     return(najkrajsaPot(nasledniki))
     
 # Pri danih ponovitvah genetskega algoritma izracuna povprecno dobljeno dolzino najkrajse poti. Zraven pa se najkrajso pot v vseh ponovitvah, ter njeno dolzino.
-
 def povprecje(ponovitve, stGeneracij, utezi, populacija, verjMutacije, kTurnir, crossover):
     vsota = 0
     najkrajsaPot = []
@@ -363,7 +324,6 @@ def povprecje(ponovitve, stGeneracij, utezi, populacija, verjMutacije, kTurnir, 
     return([vsota/ponovitve, [najkrajsaPot, najkrajsaDolzina]])
 
 # Nakljucno izbrano krizanje.
-
 def nakljucno(stars1, stars2):
     R = [OX, PMX, CX]
     return random.choice(R)(stars1, stars2)
@@ -407,66 +367,15 @@ def main():
     narisi(rezultat, lokacije)
     print(dolzinaPoti(rezultat, razdalje))
     
-# =============================================================================
-#     for g in st_generacij:
-#         for v in verj_mutacije:
-#             for p in pop_velikost:
-#                 print("\n--------------------------------------------------------------\n")
-#                 print("Število generacij: " + str(g) + ", verjetnost mutacije: " + str(v) + ", velikost populacije: " + str(p))
-#                 pop = populacija(p, razdalje)
-#                 start_time = time.time()
-#                 rezultat = povprecje(st_ponovitev, g, razdalje, pop, v, k_turnir, CO)
-#                 print("Pretečeni čas:\n")
-#                 print("--- %s seconds ---" % (time.time() - start_time))
-#                 print("\nPovprečna pot v " + str(st_ponovitev) + " ponovitvah algoritma je " + str(rezultat[0]) + ".\n")
-#                 print("Dolžina najkrajše najdene poti v " + str(st_ponovitev) + " ponovitvah algoritma je: " + str(rezultat[1][1]) + ".")
-# =============================================================================
-    
-    ## Opazimo, da se z vecanjem stevila generacij in velikosti populacije resitve izboljsujejo. Seveda pa z vecanjem teh parametrov povecujemo
-    ## tudi cas, ki ga algoritem potrebuje za izracun. Kar se tice verjetnosti mutacije pa pri vrednosti 0.015 dobimo najboljse rezultate. 
-    ## Pomislek: mutacija pomembna, za ohranjanje raznolikosti resitev, vendar pa moramo paziti,da ne mutiramo prevelikega deleza populacije, 
-    ## saj s tem izgubljamo nase zgrajene resitve.
-    ## Pri - Število generacij: 200, verjetnost mutacije: 0.015, velikost populacije: 50 - je najkrajsa dobljena pot dolga 7087, ce to primerjamo
-    ## z optimumo 7013 je to zelo blizu.
-    ## Ko podobno testiramo na berlin 52, je dolzina najkrajse poti pri - Število generacij: 200, verjetnost mutacije: 0.015, velikost populacije: 50 - 
-    ## enaka 9642, kar je ze bolj oddaljeno od optimuma pri 7544.
-
-#Analiza spreminjanja rezultatov pri različnih parametrih:
-#kroa100:
-#ob večanju velikosti populacije se dolžina najkrajše poti še kar hitro bliža optimumu, čeprav so začetne vrednosti tudi več kot dvakratniki optimalne vrednosti.
-#Opazimo tudi, da je pri večjem številu generacij najkrajša pot dvakrat daljša kot če število generacij nastavimo na 1000.
-#ulysses22:
-#enako gibanje opazimo tdi pri primeru ulysses22, le da je konvergenca k optimumu tu precej hitrejša, saj se vrednosti ne povečajo občutneje, kljub spremembi števila generacij.
-#prvi dve primerjavi sta bili opravljeni pri ordered crossover metodi, sedaj pa preizkusimo še ostali dve, in sicer na primeru
-#berlin52:
-#vidimo, da pri metodi CX dobimo precej počasno konvergenco pri uporabi mutacije 0. Vrednosti se namreč dvignejo tudi nad trikratnik optimuma.
-#vseeno pa opazimo enak trend, bližamo se optimalni rešitvi če večamo število generacij in velikost populacije.
-#če verjetnost mutacije povečamo na 0.005, se vrednosti najkrajše poti gibljejo od dvakratnika optimuma navzdol, kar je precej bolje, in sicer tudi bolje od uporabe mutacije 0.04, kjer je konvergenca zopet nekoliko počasnejša.
-#pri uporabi PMX metode opazimo, da se vrednosti vsaj pri ničelni mutaciji hitreje približujejo optimumu. zopet nam najboljše rezultate daje mutacija 0.005, vrednosti se izboljšujejo tudi z večanjem
-#števila generacij in z večanjem populacije.
-#zanimiva je tudi uporaba metode OX, pri kateri dobimo občutno boljše rezultate z uporabo mutacije 0.005, pri ostalih dveh verjetnostih mutacij pa so približki v splošnem slabši in so bolj odmaknjeni od optimuma kot pri PMX in CX.
-#zaključek:
-#Opazimo torej, da prevelik delež mutirane populacije slabša rešitev problema. To smo lahko videli pri uporabi katerekoli metode križanja.
-#pri primerjavi metod križanja ugotovimo, da je v splošnem najhitrejša metoda OX. Pri mutacijski verjetnosti 0 namreč na začetku dosega zelo slabe rezultate, ki so močno oddaljeni od optimalne rešitve,
-#a le te z večanjem populacije lahko zelo hitro znižamo, torej je konvergenca vseeno precej hitra.
-#Pri velikosti populacije 500 se pri metodi OX na primer povprečna dolžina poti (pri optimumu 7544 enot) giblje že tudi okoli 8300, na drugi strani
-#pa metoda PMX pri tej velikosti populacije daje rezultate okoli 15500, CX pa okoli 17800, torej precej bolj oddaljeno od optimalne rešitve.
-#Vidimo tudi, da je verjetnost mutacije (za vse tri metode) pri vrednosti 0.005 precej blizu optimalni, saj se že pri 0.01 in 0.02 dolžine poti
-#(npr. pri OX) zopet večajo proti 12000.
-#Če primerjamo izboljševanje rezultatov pri večanju populacije ali pa števila generacij opazimo, da na primer (za metodo OX) pri številu generacij 100 in
-#velikosti populacije 50 dobimo rezultate okoli 12000, če desetkrat povečamo število generacij so najkrajše poti okoli 10000, pri desetkratni povečavi populacije
-#pa okoli 8600. Torej je povečevanje populacije večjega pomena za konvergenco k optimalni rešitvi, kot povečava števila generacij.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    for g in st_generacij:
+        for v in verj_mutacije:
+            for p in pop_velikost:
+                print("\n--------------------------------------------------------------\n")
+                print("Število generacij: " + str(g) + ", verjetnost mutacije: " + str(v) + ", velikost populacije: " + str(p))
+                pop = populacija(p, razdalje)
+                start_time = time.time()
+                rezultat = povprecje(st_ponovitev, g, razdalje, pop, v, k_turnir, CO)
+                print("Pretečeni čas:\n")
+                print("--- %s seconds ---" % (time.time() - start_time))
+                print("\nPovprečna pot v " + str(st_ponovitev) + " ponovitvah algoritma je " + str(rezultat[0]) + ".\n")
+                print("Dolžina najkrajše najdene poti v " + str(st_ponovitev) + " ponovitvah algoritma je: " + str(rezultat[1][1]) + ".")
