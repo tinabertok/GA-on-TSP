@@ -1,4 +1,4 @@
-# GA on TSP
+﻿# GA on TSP
 Applying a genetic algorithm to the traveling salesman problem
 
 ## GA 
@@ -57,3 +57,4 @@ applications, CRC press. Chapter 8
 * https://arxiv.org/ftp/arxiv/papers/1203/1203.3097.pdf
 * https://hrcak.srce.hr/file/163313
 * http://www.mnkjournals.com/ijlrst_files/Download/Vol%201%20Issue%202/303-%20Naveen.pdf
+* http://www.iro.umontreal.ca/~dift6751/ga_tsp_tr.pdf
